@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What's your Shadow — Eszter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body class="theme-jam">
+  <nav class="jam">
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="../index.html">← Zurück</a>
+  </nav>
+  <section class="game-hero">
+    <div class="game-hero-img" style="background:#14151d"></div>
+    <div class="game-hero-overlay" style="background:linear-gradient(to top, #0d0e13 20%, rgba(13,14,19,0.7) 70%, rgba(13,14,19,0.2) 100%)"></div>
+    <div class="game-hero-content">
+      <span class="game-badge badge-jam">4-Day Game Jam</span>
+      <h1 class="game-hero-title" style="color:#c8cfe0">What's your Shadow</h1>
+      <p class="game-hero-sub" style="color:#555e75">Entstand in 4 Tagen — kurze Tagline zum Spiel.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary-jam" href="https://itch.io" target="_blank">Auf itch.io spielen</a>
+      </div>
+    </div>
+  </section>
+  <div class="game-body">
+    <div class="game-section">
+      <p class="game-section-label">Auf einen Blick</p>
+      <div class="meta-box">
+        <div class="meta-item"><div class="meta-label">Format</div><div class="meta-value">4-Day Jam</div></div>
+        <div class="meta-item"><div class="meta-label">Jam</div><div class="meta-value">Name des Jams</div></div>
+        <div class="meta-item"><div class="meta-label">Thema</div><div class="meta-value">Das Jam-Thema</div></div>
+        <div class="meta-item"><div class="meta-label">Platzierung</div><div class="meta-value">#XX Overall</div></div>
+      </div>
+    </div>
+    <div class="game-section">
+      <p class="game-section-label">Über das Spiel</p>
+      <div class="game-section-text">
+        <p>Was ist das Spielprinzip? Wie hast du das Thema des Jams umgesetzt? Was macht dieses Jam-Game besonders?</p>
+      </div>
+    </div>
+    <div class="game-section">
+      <p class="game-section-label">Die 4 Tage</p>
+      <div class="game-section-text">
+        <p>Wie war das Erlebnis? Was hast du in den 4 Tagen durchgemacht — von der ersten Idee bis zur Abgabe? Was hat geklappt, was nicht? Was hast du gelernt?</p>
+        <p>Jam-Devlogs sind bei Spielern sehr beliebt — erzähl ruhig ehrlich davon.</p>
+      </div>
+    </div>
+    <div class="game-section">
+      <p class="game-section-label">Screenshots</p>
+      <div class="photo-grid cols-2">
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 1<br><small>img/shadow-1.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 2<br><small>img/shadow-2.jpg</small></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="lb-overlay" id="lb"><button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button><img id="lb-img" src="" alt=""/></div>
+  <script>document.querySelectorAll('.photo-slot img').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lb').classList.add('open');});});document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('open');});</script>
+</body>
+</html>

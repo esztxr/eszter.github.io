@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boxventure — Eszter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body class="theme-cozy">
+  <nav class="light">
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="../index.html">← Zurück</a>
+  </nav>
+
+  <section class="game-hero">
+    <div class="game-hero-img" style="background:#f0e8da"></div>
+    <div class="game-hero-overlay" style="background:linear-gradient(to top, #faf6ef 20%, rgba(250,246,239,0.5) 70%, transparent 100%)"></div>
+    <div class="game-hero-content">
+      <span class="game-badge badge-cozy">Cozy Adventure</span>
+      <h1 class="game-hero-title" style="color:#2e2318">Boxventure</h1>
+      <p class="game-hero-sub" style="color:#8a7060">Kurze Tagline — warm und einladend.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary-cozy" href="https://itch.io" target="_blank">Auf itch.io spielen</a>
+        <a class="btn btn-outline-cozy" href="https://itch.io" target="_blank">Mehr auf itch.io</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="game-body">
+    <div class="game-section">
+      <p class="game-section-label">Auf einen Blick</p>
+      <div class="meta-box">
+        <div class="meta-item"><div class="meta-label">Genre</div><div class="meta-value">Adventure</div></div>
+        <div class="meta-item"><div class="meta-label">Stimmung</div><div class="meta-value">Cozy</div></div>
+        <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Godot / Unity</div></div>
+        <div class="meta-item"><div class="meta-label">Jahr</div><div class="meta-value">2024</div></div>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Über das Spiel</p>
+      <div class="game-section-text">
+        <p>Was ist Boxventure? Hier schreibst du eine warme, einladende Beschreibung des Spiels. Was macht es besonders, welche Stimmung vermittelt es?</p>
+        <p>Weitere Details zum Gameplay, der Welt oder den Charakteren.</p>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Die Geschichte dahinter</p>
+      <div class="game-section-text">
+        <p>Wie ist Boxventure entstanden? Was hat dich inspiriert, dieses Spiel zu machen? Was wolltest du den Spielerinnen und Spielern damit geben?</p>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Screenshots</p>
+      <div class="photo-grid cols-3">
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 1<br><small>img/boxventure-1.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 2<br><small>img/boxventure-2.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 3<br><small>img/boxventure-3.jpg</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lb-overlay" id="lb">
+    <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+    <img id="lb-img" src="" alt=""/>
+  </div>
+  <script>
+    document.querySelectorAll('.photo-slot img').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lb').classList.add('open');});});
+    document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('open');});
+  </script>
+</body>
+</html>

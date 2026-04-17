@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dein Horror Game — Eszter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body class="theme-dark">
+  <nav class="dark">
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="../index.html">← Zurück</a>
+  </nav>
+
+  <section class="game-hero">
+    <!-- Hintergrundbild: Lade img/horror1-hero.jpg hoch und entferne diesen Kommentar -->
+    <!-- <div class="game-hero-img" style="background-image:url('../img/horror1-hero.jpg')"></div> -->
+    <div class="game-hero-img" style="background:#130f0a"></div>
+    <div class="game-hero-overlay" style="background:linear-gradient(to top, #0a0805 20%, rgba(10,8,5,0.6) 60%, rgba(10,8,5,0.2) 100%)"></div>
+    <div class="game-hero-content">
+      <span class="game-badge badge-early">Early Access</span>
+      <h1 class="game-hero-title" style="color:#d4c5b0">Dein Horror Game</h1>
+      <p class="game-hero-sub" style="color:#6b5f52">Dein Untertitel oder Tagline — kurz und atmosphärisch.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary-dark" href="https://itch.io" target="_blank">Auf itch.io spielen</a>
+        <a class="btn btn-outline-dark" href="https://tiktok.com" target="_blank">TikTok folgen</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="game-body">
+    <div class="game-section">
+      <p class="game-section-label">Auf einen Blick</p>
+      <div class="meta-box">
+        <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Early Access</div></div>
+        <div class="meta-item"><div class="meta-label">Genre</div><div class="meta-value">Horror</div></div>
+        <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Godot / Unity</div></div>
+        <div class="meta-item"><div class="meta-label">Jahr</div><div class="meta-value">2024</div></div>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Über das Spiel</p>
+      <div class="game-section-text">
+        <p>Hier kommt deine Beschreibung des Spiels. Was erlebt der Spieler? Welche Atmosphäre schaffst du? Was macht dieses Horror-Spiel besonders?</p>
+        <p>Du kannst mehrere Absätze schreiben — erzähl ruhig etwas über das Spielprinzip, die Story oder die Stimmung.</p>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Die Geschichte dahinter</p>
+      <div class="game-section-text">
+        <p>Hier schreibst du deine persönliche Entwicklungsgeschichte. Wie bist du auf die Idee gekommen? Was hat dich inspiriert? Gab es Momente die dich selbst erschreckt haben während du es gebaut hast?</p>
+        <p>Das darf ehrlich, persönlich und roh sein. Menschen lieben es zu wissen was hinter einem Spiel steckt.</p>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Screenshots &amp; Eindrücke</p>
+      <!--
+        BILDER EINFÜGEN:
+        1. Lade deine Screenshots in den "img" Ordner im Repo hoch
+        2. Ersetze jede photo-placeholder div durch:
+           <div class="photo-slot"><img src="../img/DATEINAME.jpg" alt="Beschreibung"/></div>
+      -->
+      <div class="photo-grid cols-2">
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 1<br><small>img/horror1-screen1.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 2<br><small>img/horror1-screen2.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 3<br><small>img/horror1-screen3.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">Screenshot 4<br><small>img/horror1-screen4.jpg</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lb-overlay" id="lb">
+    <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+    <img id="lb-img" src="" alt=""/>
+  </div>
+  <script>
+    document.querySelectorAll('.photo-slot img').forEach(img => {
+      img.style.cursor='zoom-in';
+      img.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lb').classList.add('open');});
+    });
+    document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('open');});
+  </script>
+</body>
+</html>

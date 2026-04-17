@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nächstes Horror Game — Eszter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body class="theme-dark">
+  <nav class="dark">
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="../index.html">← Zurück</a>
+  </nav>
+
+  <section class="game-hero">
+    <div class="game-hero-img" style="background:#0a0805"></div>
+    <div class="game-hero-overlay" style="background:linear-gradient(to top, #0a0805 20%, rgba(10,8,5,0.7) 70%, rgba(10,8,5,0.3) 100%)"></div>
+    <div class="game-hero-content">
+      <span class="game-badge badge-dev">In Development</span>
+      <h1 class="game-hero-title" style="color:#d4c5b0">Nächstes Horror Game</h1>
+      <p class="game-hero-sub" style="color:#6b5f52">Folg mir auf TikTok für Behind-the-Scenes, Devlogs und erste Einblicke.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary-dark" href="https://tiktok.com/@deinname" target="_blank">Auf TikTok folgen</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="game-body">
+    <div class="game-section">
+      <p class="game-section-label">Status</p>
+      <div class="meta-box">
+        <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">In Development</div></div>
+        <div class="meta-item"><div class="meta-label">Genre</div><div class="meta-value">Horror</div></div>
+        <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Godot / Unity</div></div>
+        <div class="meta-item"><div class="meta-label">Release</div><div class="meta-value">TBD</div></div>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Was entsteht hier?</p>
+      <div class="game-section-text">
+        <p>Hier schreibst du was du gerade baust — so viel oder so wenig wie du verraten möchtest. Es darf mysteriös sein!</p>
+        <p>Folg mir auf TikTok um als erste(r) Updates, Devlogs und erste Gameplay-Einblicke zu sehen.</p>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <p class="game-section-label">Frühe Einblicke</p>
+      <div class="photo-grid cols-2">
+        <div class="photo-slot"><div class="photo-placeholder">WIP Screenshot 1<br><small>img/horror2-wip1.jpg</small></div></div>
+        <div class="photo-slot"><div class="photo-placeholder">WIP Screenshot 2<br><small>img/horror2-wip2.jpg</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lb-overlay" id="lb">
+    <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+    <img id="lb-img" src="" alt=""/>
+  </div>
+  <script>
+    document.querySelectorAll('.photo-slot img').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lb').classList.add('open');});});
+    document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('open');});
+  </script>
+</body>
+</html>
