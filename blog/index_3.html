@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Eszter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --horror-bg: #0a0805; --horror-surface: #130f0a; --horror-accent: #8b1a1a;
+      --horror-accent2: #c0392b; --horror-text: #d4c5b0; --horror-muted: #6b5f52;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--horror-bg); color: var(--horror-text); min-height: 100vh; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(10,8,5,0.9); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(139,26,26,0.2); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--horror-text); text-decoration: none; }
+    .nav-back { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--horror-muted); transition: color 0.2s; }
+    .nav-back:hover { color: var(--horror-text); }
+
+    .blog-header { padding: 10rem 2rem 4rem; text-align: center; }
+    .blog-eyebrow { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--horror-accent2); margin-bottom: 1rem; }
+    .blog-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--horror-text); line-height: 1.1; }
+    .blog-header h1 em { font-style: italic; color: var(--horror-accent2); }
+    .blog-header p { color: var(--horror-muted); font-size: 0.95rem; margin-top: 1rem; font-weight: 300; }
+
+    .blog-list { max-width: 720px; margin: 0 auto; padding: 2rem 2rem 8rem; }
+
+    /* Filter-Tabs */
+    .blog-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .filter-btn { background: none; border: 1px solid rgba(139,26,26,0.3); color: var(--horror-muted); font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--horror-accent2); color: var(--horror-text); }
+    .filter-btn.active { background: var(--horror-accent); border-color: var(--horror-accent); color: #fff; }
+
+    /* Eintrag */
+    .blog-entry {
+      display: block; text-decoration: none;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(139,26,26,0.15);
+      transition: padding-left 0.2s;
+    }
+    .blog-entry:hover { padding-left: 0.5rem; }
+    .blog-entry:first-child { border-top: 1px solid rgba(139,26,26,0.15); }
+    .entry-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .entry-date { font-size: 0.75rem; color: var(--horror-muted); letter-spacing: 0.08em; }
+    .entry-cat { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.15rem 0.55rem; border: 1px solid rgba(139,26,26,0.4); color: var(--horror-accent2); }
+    .entry-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--horror-text); margin-bottom: 0.6rem; line-height: 1.2; }
+    .entry-excerpt { font-size: 0.88rem; color: var(--horror-muted); line-height: 1.7; font-weight: 300; }
+    .entry-read { font-size: 0.72rem; color: var(--horror-accent2); margin-top: 0.75rem; display: block; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--horror-muted); }
+    .footer-copy { font-size: 0.78rem; color: var(--horror-muted); opacity: 0.5; }
+    @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="../index.html">← Zurück</a>
+  </nav>
+
+  <div class="blog-header">
+    <p class="blog-eyebrow">Devlogs &amp; Gedanken</p>
+    <h1>Mein <em>Blog</em></h1>
+    <p>Hinter den Kulissen meiner Spiele — ehrlich, persönlich, ungefiltert.</p>
+  </div>
+
+  <div class="blog-list">
+
+    <div class="blog-filter">
+      <button class="filter-btn active" onclick="filterBlog('alle', this)">Alle</button>
+      <button class="filter-btn" onclick="filterBlog('devlog', this)">Devlog</button>
+      <button class="filter-btn" onclick="filterBlog('behind the scenes', this)">Behind the Scenes</button>
+      <button class="filter-btn" onclick="filterBlog('game jam', this)">Game Jam</button>
+      <button class="filter-btn" onclick="filterBlog('gedanken', this)">Gedanken</button>
+    </div>
+
+    <!--
+      NEUEN EINTRAG HINZUFÜGEN:
+      1. Kopiere einen .blog-entry Block
+      2. Passe href, Datum, Kategorie (data-cat), Titel und Excerpt an
+      3. Neueste Einträge OBEN einfügen
+      4. Erstelle die passende HTML-Datei im blog/ Ordner (Vorlage = vorlage.html)
+    -->
+
+    <a class="blog-entry" href="eintrag-1.html" data-cat="devlog">
+      <div class="entry-meta">
+        <span class="entry-date">19. April 2025</span>
+        <span class="entry-cat">Devlog</span>
+      </div>
+      <div class="entry-title">Mein erster Blogeintrag — Willkommen!</div>
+      <div class="entry-excerpt">Kurze Vorschau des Eintrags — zwei bis drei Sätze die Lust aufs Weiterlesen machen.</div>
+      <span class="entry-read">Weiterlesen →</span>
+    </a>
+
+    <a class="blog-entry" href="eintrag-2.html" data-cat="behind the scenes">
+      <div class="entry-meta">
+        <span class="entry-date">12. März 2025</span>
+        <span class="entry-cat">Behind the Scenes</span>
+      </div>
+      <div class="entry-title">Wie Early Access entstanden ist</div>
+      <div class="entry-excerpt">Kurze Vorschau des zweiten Eintrags.</div>
+      <span class="entry-read">Weiterlesen →</span>
+    </a>
+
+    <a class="blog-entry" href="eintrag-3.html" data-cat="game jam">
+      <div class="entry-meta">
+        <span class="entry-date">1. Februar 2025</span>
+        <span class="entry-cat">Game Jam</span>
+      </div>
+      <div class="entry-title">4 Tage, ein Spiel — meine Game Jam Erfahrung</div>
+      <div class="entry-excerpt">Was passiert wenn man 96 Stunden Zeit hat und ein ganzes Spiel bauen muss? Spoiler: Chaos. Aber die beste Art von Chaos.</div>
+      <span class="entry-read">Weiterlesen →</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <span class="footer-name">Eszter</span>
+    <span class="footer-copy">© 2025 — All rights reserved</span>
+  </footer>
+
+  <script>
+    function filterBlog(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.blog-entry').forEach(entry => {
+        if (cat === 'alle' || entry.dataset.cat === cat) {
+          entry.style.display = 'block';
+        } else {
+          entry.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

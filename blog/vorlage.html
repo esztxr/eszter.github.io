@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- TITEL ANPASSEN: -->
+  <title>Titel des Eintrags — Eszter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --horror-bg: #0a0805; --horror-surface: #130f0a; --horror-accent: #8b1a1a;
+      --horror-accent2: #c0392b; --horror-text: #d4c5b0; --horror-muted: #6b5f52;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--horror-bg); color: var(--horror-text); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(10,8,5,0.9); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(139,26,26,0.2); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--horror-text); text-decoration: none; letter-spacing: 0.05em; }
+    .nav-back { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--horror-muted); transition: color 0.2s; }
+    .nav-back:hover { color: var(--horror-text); }
+
+    .entry-header { padding: 10rem 2rem 3rem; max-width: 720px; margin: 0 auto; }
+    .entry-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .entry-date { font-size: 0.75rem; color: var(--horror-muted); letter-spacing: 0.08em; }
+    .entry-cat { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.15rem 0.55rem; border: 1px solid rgba(139,26,26,0.4); color: var(--horror-accent2); }
+    .entry-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--horror-text); line-height: 1.1; margin-bottom: 1rem; }
+    .entry-title em { font-style: italic; color: var(--horror-accent2); }
+    .entry-intro { font-size: 1.05rem; color: var(--horror-muted); line-height: 1.75; font-weight: 300; }
+
+    .entry-divider { max-width: 720px; margin: 2.5rem auto; border: none; border-top: 1px solid rgba(139,26,26,0.2); }
+
+    /* Haupt-Content */
+    .entry-body { max-width: 720px; margin: 0 auto; padding: 0 2rem 8rem; }
+    .entry-body p { font-size: 0.97rem; color: var(--horror-muted); line-height: 1.85; font-weight: 300; margin-bottom: 1.25rem; }
+    .entry-body p strong { color: var(--horror-text); font-weight: 500; }
+    .entry-body p em { font-style: italic; color: var(--horror-text); }
+    .entry-body h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--horror-text); margin: 2.5rem 0 1rem; }
+    .entry-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--horror-text); margin: 2rem 0 0.75rem; font-style: italic; }
+
+    /* Bild im Eintrag */
+    .entry-img { width: 100%; margin: 2rem 0; }
+    .entry-img img { width: 100%; display: block; }
+    .entry-img figcaption { font-size: 0.75rem; color: var(--horror-muted); margin-top: 0.5rem; letter-spacing: 0.05em; }
+
+    /* Navigation zwischen Einträgen */
+    .entry-nav { max-width: 720px; margin: 0 auto; padding: 2rem 2rem 4rem; display: flex; justify-content: space-between; border-top: 1px solid rgba(139,26,26,0.15); }
+    .entry-nav a { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--horror-muted); text-decoration: none; transition: color 0.2s; }
+    .entry-nav a:hover { color: var(--horror-accent2); }
+
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--horror-muted); }
+    .footer-copy { font-size: 0.78rem; color: var(--horror-muted); opacity: 0.5; }
+    @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } .entry-header, .entry-body { padding-left: 1.25rem; padding-right: 1.25rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="index.html">← Alle Einträge</a>
+  </nav>
+
+  <div class="entry-header">
+    <div class="entry-meta">
+      <!-- DATUM UND KATEGORIE ANPASSEN: -->
+      <span class="entry-date">19. April 2025</span>
+      <span class="entry-cat">Devlog</span>
+    </div>
+    <!-- TITEL ANPASSEN: -->
+    <h1 class="entry-title">Titel des <em>Eintrags</em></h1>
+    <!-- INTRO-SATZ (wird fett/größer angezeigt): -->
+    <p class="entry-intro">Ein einleitender Satz der den Leser reinholt — kurz, direkt, neugierig machend.</p>
+  </div>
+
+  <hr class="entry-divider"/>
+
+  <div class="entry-body">
+
+    <!--
+      AB HIER KOMMT DEIN TEXT.
+      Nutze <p> für Absätze, <h2> für Überschriften, <h3> für Unterüberschriften.
+      <strong> für fett, <em> für kursiv.
+
+      Bilder einfügen mit:
+      <figure class="entry-img">
+        <img src="../img/DATEINAME.jpg" alt="Beschreibung">
+        <figcaption>Optional: Bildunterschrift</figcaption>
+      </figure>
+    -->
+
+    <p>Hier fängt dein Text an. Schreib einfach drauf los — so wie du es mir auch schon in unseren Gesprächen erklärt hast. Persönlich, ehrlich, in deiner eigenen Stimme.</p>
+
+    <p>Du kannst <strong>fett</strong> und <em>kursiv</em> nutzen um bestimmte Dinge zu betonen.</p>
+
+    <h2>Eine Zwischenüberschrift</h2>
+
+    <p>Nach der Überschrift geht der Text einfach weiter. Kein Limit wie viel du schreiben kannst — das ist ja der Vorteil einer eigenen Seite.</p>
+
+    <figure class="entry-img">
+      <img src="../img/DEIN-BILD.jpg" alt="Beschreibung des Bildes">
+      <figcaption>Optional: Was ist auf dem Bild zu sehen?</figcaption>
+    </figure>
+
+    <p>Und nach dem Bild geht der Text einfach weiter.</p>
+
+  </div>
+
+  <!-- Navigation zwischen Einträgen — Links/Rechts anpassen: -->
+  <div class="entry-nav">
+    <a href="eintrag-vorher.html">← Vorheriger Eintrag</a>
+    <a href="eintrag-nachher.html">Nächster Eintrag →</a>
+  </div>
+
+  <footer>
+    <span class="footer-name">Eszter</span>
+    <span class="footer-copy">© 2025 — All rights reserved</span>
+  </footer>
+</body>
+</html>
