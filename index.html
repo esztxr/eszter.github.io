@@ -17,11 +17,25 @@
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--horror-bg); color: var(--horror-text); overflow-x: hidden; }
+
+    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(10,8,5,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(139,26,26,0.2); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; letter-spacing: 0.05em; color: var(--horror-text); text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a { color: var(--horror-muted); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s; }
     .nav-links a:hover { color: var(--horror-text); }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switch { display: flex; align-items: center; gap: 0; border: 1px solid rgba(139,26,26,0.35); overflow: hidden; }
+    .lang-btn { background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.7rem; color: var(--horror-muted); transition: background 0.2s, color 0.2s; }
+    .lang-btn:first-child { border-right: 1px solid rgba(139,26,26,0.35); }
+    .lang-btn.active { background: var(--horror-accent); color: #fff; }
+    .lang-btn:not(.active):hover { color: var(--horror-text); }
+
+    /* TRANSLATIONS — hide/show */
+    [data-de], [data-en] { display: none; }
+
     .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 2rem 4rem; }
     .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(139,26,26,0.08) 0%, transparent 60%); }
     .hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(rgba(139,26,26,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(139,26,26,0.8) 1px, transparent 1px); background-size: 60px 60px; }
@@ -49,8 +63,6 @@
     .horror-side .side-label::after { content:''; flex:1; height:1px; background: rgba(139,26,26,0.3); }
     .cozy-side .side-label { color: var(--cozy-accent); }
     .cozy-side .side-label::after { content:''; flex:1; height:1px; background: rgba(196,122,58,0.3); }
-
-    /* ── CARD ── */
     .game-card { border: 1px solid rgba(139,26,26,0.22); margin-bottom: 1.25rem; cursor: pointer; transition: border-color 0.3s, transform 0.2s; position: relative; overflow: hidden; display: block; text-decoration: none; }
     .game-card:hover { border-color: var(--horror-accent); transform: translateY(-2px); }
     .card-body { padding: 1.25rem 1.5rem 1.5rem; }
@@ -69,71 +81,22 @@
     .cozy-side .game-desc { color: var(--cozy-muted); }
     .cozy-side .tag { border-color: rgba(196,122,58,0.35); color: var(--cozy-muted); }
     .cozy-side .card-arrow { color: var(--cozy-accent2); }
-
-    /* ── VIDEO / THUMB BEREICH ── */
-    .card-media {
-      width: 100%;
-      aspect-ratio: 16/7;
-      position: relative;
-      overflow: hidden;
-      background: #000;
-    }
-    .card-media img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s;
-    }
+    .card-media { width: 100%; aspect-ratio: 16/7; position: relative; overflow: hidden; background: #000; }
+    .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
     .game-card:hover .card-media img { transform: scale(1.03); }
-    .card-media-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(19,15,10,0.55) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .card-media video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-    .card-media.playing img,
-    .card-media.playing .card-media-overlay { display: none; }
+    .card-media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(19,15,10,0.55) 0%, transparent 60%); pointer-events: none; }
+    .card-media video { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .card-media.playing img, .card-media.playing .card-media-overlay { display: none; }
     .card-media.playing video { display: block; }
     .card-media.playing .play-btn { display: none; }
-
-    /* Play Button */
-    .play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.55);
-      border: 2px solid rgba(255,255,255,0.7);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      z-index: 10;
-    }
+    .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.55); border: 2px solid rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, transform 0.2s; z-index: 10; }
     .play-btn:hover { background: rgba(0,0,0,0.8); transform: translate(-50%, -50%) scale(1.1); }
     .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
-
-    /* Placeholder wenn kein Bild/Video */
-    .card-placeholder {
-      width: 100%; aspect-ratio: 16/7;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; letter-spacing: 0.1em; padding: 1rem; text-align: center;
-    }
-    .horror-side .card-placeholder { background: rgba(139,26,26,0.07); border-bottom: 1px solid rgba(139,26,26,0.15); color: var(--horror-muted); }
-    .cozy-side .card-placeholder { background: rgba(196,122,58,0.07); border-bottom: 1px solid rgba(196,122,58,0.15); color: var(--cozy-muted); }
-
-    /* ── JAM ── */
     #gamejam { padding: 7rem 2rem; background: var(--jam-bg); border-top: 1px solid rgba(74,111,165,0.15); }
     .gamejam-inner { max-width: 1060px; margin: 0 auto; }
     .jam-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem; }
     .jam-card { border: 1px solid rgba(74,111,165,0.2); background: var(--jam-surface); overflow: hidden; cursor: pointer; transition: border-color 0.3s, transform 0.2s; text-decoration: none; display: block; }
     .jam-card:hover { border-color: var(--jam-accent); transform: translateY(-2px); }
-
-    /* Jam media */
     .jam-media { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; background: #000; }
     .jam-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
     .jam-card:hover .jam-media img { transform: scale(1.03); }
@@ -142,15 +105,12 @@
     .jam-media.playing video { display: block; }
     .jam-media.playing .play-btn { display: none; }
     .jam-placeholder { width: 100%; aspect-ratio: 16/9; background: rgba(74,111,165,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; color: var(--jam-muted); letter-spacing: 0.1em; padding: 1rem; text-align: center; }
-
     .jam-card-body { padding: 1.25rem 1.5rem 1.5rem; }
     .jam-badge { font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--jam-accent2); margin-bottom: 0.5rem; display: block; }
     .jam-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--jam-text); margin-bottom: 0.4rem; }
     .jam-event { font-size: 0.78rem; color: var(--jam-muted); font-style: italic; margin-bottom: 0.65rem; }
     .jam-desc { font-size: 0.82rem; color: var(--jam-muted); line-height: 1.6; font-weight: 300; }
     .jam-arrow { font-size: 0.72rem; color: var(--jam-accent2); margin-top: 0.75rem; display: block; letter-spacing: 0.08em; text-transform: uppercase; }
-
-    /* ── ABOUT ── */
     #about { padding: 7rem 2rem; background: var(--horror-surface); display: flex; justify-content: center; border-top: 1px solid rgba(139,26,26,0.15); }
     .about-inner { max-width: 900px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; }
     .about-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--horror-accent2); margin-bottom: 1.5rem; }
@@ -168,8 +128,6 @@
     .about-corner.tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
     .about-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
     .about-corner.br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
-
-    /* ── CONTACT ── */
     #contact { padding: 7rem 2rem; background: var(--horror-bg); text-align: center; border-top: 1px solid rgba(139,26,26,0.2); }
     .contact-sub { color: var(--horror-muted); font-size: 0.95rem; margin-bottom: 3rem; font-weight: 300; }
     .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
@@ -193,11 +151,17 @@
 <body>
   <nav>
     <a href="#" class="nav-logo">Eszter</a>
-    <div class="nav-links">
-      <a href="#games">Games</a>
-      <a href="#gamejam">Game Jams</a>
-      <a href="#about">Über mich</a>
-      <a href="#contact">Kontakt</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#games"><span data-de>Games</span><span data-en>Games</span></a>
+        <a href="#gamejam"><span data-de>Game Jams</span><span data-en>Game Jams</span></a>
+        <a href="#about"><span data-de>Über mich</span><span data-en>About</span></a>
+        <a href="#contact"><span data-de>Kontakt</span><span data-en>Contact</span></a>
+      </div>
+      <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
     </div>
   </nav>
 
@@ -207,9 +171,14 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Game Creator · Independent Developer</p>
       <h1 class="hero-title">I make worlds<br>you <em>fear</em> &amp; love</h1>
-      <p class="hero-sub">Von gemütlichen Cozy-Games zu atmosphärischen
-        <br>Horror-Erfahrungen, ich baue Spiele, die etwas hinterlassen.</p>
-      <a href="#games" class="hero-cta">Meine Games entdecken</a>
+      <p class="hero-sub">
+        <span data-de>Von gemütlichen Cozy-Games zu atmosphärischen<br>Horror-Erfahrungen, ich baue Spiele, die etwas hinterlassen.</span>
+        <span data-en>From cozy wholesome games to atmospheric<br>horror experiences, I build worlds that stay with you.</span>
+      </p>
+      <a href="#games" class="hero-cta">
+        <span data-de>Meine Games entdecken</span>
+        <span data-en>Discover my games</span>
+      </a>
     </div>
     <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
   </section>
@@ -217,20 +186,19 @@
   <section id="games">
     <div class="games-intro">
       <p class="section-eyebrow" style="color:var(--horror-accent2)">Portfolio</p>
-      <h2 class="section-title" style="color:var(--horror-text)">Zwei Welten. Eine Entwicklerin.</h2>
+      <h2 class="section-title" style="color:var(--horror-text)">
+        <span data-de>Zwei Welten. Eine Entwicklerin.</span>
+        <span data-en>Two worlds. One developer.</span>
+      </h2>
     </div>
     <div class="split-wrapper">
 
-      <!-- HORROR -->
       <div class="horror-side">
         <p class="side-label">Horror &amp; Atmospheric</p>
 
-        <!-- EARLY ACCESS-->
         <a class="game-card" href="games/horror1.html">
           <div class="card-media">
-            <img src="img/EarlyAccessthumb.png" alt="Early Access"> 
-            <!-- <video src="img/horror1.mp4" loop playsinline muted></video> -->
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;color:var(--horror-muted);letter-spacing:0.1em;padding:1rem;text-align:center;">Bild + Video einfügen:<br>img/horror1.jpg &amp; img/horror1.mp4</div>
+            <img src="img/EarlyAccessthumb.png" alt="Early Access">
             <div class="card-media-overlay"></div>
             <button class="play-btn" aria-label="Video abspielen">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -241,45 +209,48 @@
               <span class="game-title">EARLY ACCESS</span>
               <span class="game-badge-sm badge-early">published</span>
             </div>
-            <p class="game-desc">You agree to test a murder mystery game set in a 1970s hotel but soon, unexplainable things begin to happen. Can you escape the game?</p>
+            <p class="game-desc">
+              <span data-de>Du stimmst zu, ein Murder-Mystery-Spiel in einem Hotel aus den 1970ern zu testen — doch bald beginnen unerklärliche Dinge zu geschehen. Kannst du dem Spiel entkommen?</span>
+              <span data-en>You agree to test a murder mystery game set in a 1970s hotel but soon, unexplainable things begin to happen. Can you escape the game?</span>
+            </p>
             <div class="game-tags"><span class="tag">Horror</span><span class="tag">Atmospheric</span><span class="tag">indie</span></div>
-            <span class="card-arrow">Mehr erfahren →</span>
+            <span class="card-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
 
-        <!-- sHELLS Market -->
         <a class="game-card" href="games/horror2.html">
           <div class="card-media">
-            <!-- <img src="img/horror2.jpg" alt="sHELLS Market"> -->
-            <!-- <video src="img/horror2.mp4" loop playsinline muted></video> -->
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;color:var(--horror-muted);letter-spacing:0.1em;padding:1rem;text-align:center;">Bild + Video einfügen:<br>img/horror2.jpg &amp; img/horror2.mp4</div>
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;color:var(--horror-muted);letter-spacing:0.1em;padding:1rem;text-align:center;">img/horror2.jpg</div>
             <div class="card-media-overlay"></div>
-            <!-- hier Pfeile löschen wenn video da <button class="play-btn" aria-label="Video abspielen">
-              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-            </button>-->
           </div>
           <div class="card-body">
             <div class="card-top">
               <span class="game-title">sHELLS Market</span>
               <span class="game-badge-sm badge-dev">In Development</span>
             </div>
-            <p class="game-desc">In Entwicklung :) folg mir auf TikTok für Updates und Behind-the-Scenes.</p>
+            <p class="game-desc">
+              <span data-de>In Entwicklung :) Folg mir auf TikTok für Updates und Behind-the-Scenes.</span>
+              <span data-en>In development :) Follow me on TikTok for updates and behind-the-scenes.</span>
+            </p>
             <div class="game-tags"><span class="tag">Horror</span><span class="tag">Coming Soon</span></div>
-            <span class="card-arrow">Mehr erfahren →</span>
+            <span class="card-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
       </div>
 
-      <!-- COZY -->
       <div class="cozy-side">
         <p class="side-label">Cozy &amp; Wholesome</p>
 
-        <!-- Boxventure -->
         <a class="game-card" href="games/boxventure.html">
           <div class="card-media">
             <img src="img/boxventure.png" alt="Boxventure">
             <video src="img/BoxventureHoverVideo.mp4" loop playsinline muted></video>
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;color:var(--cozy-muted);letter-spacing:0.1em;padding:1rem;text-align:center;background:rgba(196,122,58,0.07);">Bild + Video einfügen:<br>img/boxventure.jpg &amp; img/boxventure.mp4</div>
             <div class="card-media-overlay"></div>
             <button class="play-btn" aria-label="Video abspielen">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -287,18 +258,21 @@
           </div>
           <div class="card-body">
             <div class="card-top"><span class="game-title">Boxventure</span></div>
-            <p class="game-desc">cozy Jump'n'Run</p>
+            <p class="game-desc">
+              <span data-de>Gemütliches Jump 'n' Run Abenteuer.</span>
+              <span data-en>Cozy jump 'n' run adventure.</span>
+            </p>
             <div class="game-tags"><span class="tag">Adventure</span><span class="tag">Cozy</span></div>
-            <span class="card-arrow">Mehr erfahren →</span>
+            <span class="card-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
 
-        <!-- SPIRITS -->
         <a class="game-card" href="games/spirits.html">
           <div class="card-media">
             <img src="img/SpiritsThumb.png" alt="SPIRITS">
-            <!-- <video src="img/spirits.mp4" loop playsinline muted></video> -->
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;color:var(--cozy-muted);letter-spacing:0.1em;padding:1rem;text-align:center;background:rgba(196,122,58,0.07);">Bild + Video einfügen:<br>img/spirits.jpg &amp; img/spirits.mp4</div>
             <div class="card-media-overlay"></div>
             <button class="play-btn" aria-label="Video abspielen">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -306,24 +280,34 @@
           </div>
           <div class="card-body">
             <div class="card-top"><span class="game-title">SPIRITS</span></div>
-            <p class="game-desc">Ein Pixel Jump 'n' Run mit besonderer Atmosphäre.</p>
+            <p class="game-desc">
+              <span data-de>Ein Pixel Jump 'n' Run mit besonderer Atmosphäre.</span>
+              <span data-en>A pixel jump 'n' run with a unique atmosphere.</span>
+            </p>
             <div class="game-tags"><span class="tag">Pixel Art</span><span class="tag">Jump 'n' Run</span></div>
-            <span class="card-arrow">Mehr erfahren →</span>
+            <span class="card-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
 
-        <!-- Yura -->
         <a class="game-card" href="games/yura.html">
           <div class="card-media">
             <img src="img/YuraThumb.png" alt="Yura and the Fallen Star">
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;color:var(--cozy-muted);letter-spacing:0.1em;padding:1rem;text-align:center;background:rgba(196,122,58,0.07);">Bild + Video einfügen:<br>img/yura.jpg &amp; img/yura.mp4</div>
             <div class="card-media-overlay"></div>
           </div>
           <div class="card-body">
             <div class="card-top"><span class="game-title">Yura and the Fallen Star</span></div>
-            <p class="game-desc">A cozy journey to restore a fallen star.</p>
+            <p class="game-desc">
+              <span data-de>Eine gemütliche Reise, um einen gefallenen Stern zu retten.</span>
+              <span data-en>A cozy journey to restore a fallen star.</span>
+            </p>
             <div class="game-tags"><span class="tag">relaxing</span><span class="tag">Wholesome</span></div>
-            <span class="card-arrow">Mehr erfahren →</span>
+            <span class="card-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
       </div>
@@ -331,21 +315,24 @@
     </div>
   </section>
 
-  <!-- GAME JAMS -->
   <section id="gamejam">
     <div class="gamejam-inner">
       <div style="text-align:center">
         <p class="section-eyebrow" style="color:var(--jam-accent2)">Game Jams</p>
-        <h2 class="section-title" style="color:var(--jam-text);margin-bottom:0.75rem">96 Stunden. Chaos. Magie.</h2>
-        <p style="color:var(--jam-muted);font-size:0.92rem;font-weight:300">Diese Spiele entstanden innerhalb von 4 Tagen.</p>
+        <h2 class="section-title" style="color:var(--jam-text);margin-bottom:0.75rem">
+          <span data-de>96 Stunden. Chaos. Magie.</span>
+          <span data-en>96 hours. Chaos. Magic.</span>
+        </h2>
+        <p style="color:var(--jam-muted);font-size:0.92rem;font-weight:300">
+          <span data-de>Diese Spiele entstanden innerhalb von 4 Tagen.</span>
+          <span data-en>These games were built in just 4 days.</span>
+        </p>
       </div>
       <div class="jam-grid">
 
         <a class="jam-card" href="games/robojobo.html">
           <div class="jam-media">
             <img src="img/RoboThumb.png" alt="Robo Jobo INC.">
-            <!-- <video src="img/robojobo.mp4" loop playsinline muted></video> -->
-            <div class="jam-placeholder">Bild + Video:<br>img/robojobo.jpg &amp; .mp4</div>
             <button class="play-btn" aria-label="Video abspielen">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
             </button>
@@ -354,8 +341,14 @@
             <span class="jam-badge">4-Day Game Jam</span>
             <h3 class="jam-title">Robo Jobo INC.</h3>
             <p class="jam-event">Game Jam · 2024</p>
-            <p class="jam-desc">provide robots with suitable jobs</p>
-            <span class="jam-arrow">Mehr erfahren →</span>
+            <p class="jam-desc">
+              <span data-de>Vermittle Robotern passende Jobs.</span>
+              <span data-en>Provide robots with suitable jobs.</span>
+            </p>
+            <span class="jam-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
 
@@ -363,7 +356,6 @@
           <div class="jam-media">
             <img src="img/Frogthumb.png" alt="Frog Off">
             <video src="img/FrogClips.mp4" loop playsinline muted></video>
-            <div class="jam-placeholder">Bild + Video:<br>img/frogoff.jpg &amp; .mp4</div>
             <button class="play-btn" aria-label="Video abspielen">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
             </button>
@@ -372,16 +364,20 @@
             <span class="jam-badge">4-Day Game Jam</span>
             <h3 class="jam-title">Frog Off</h3>
             <p class="jam-event">Game Jam · 2024</p>
-            <p class="jam-desc">Protect your home</p>
-            <span class="jam-arrow">Mehr erfahren →</span>
+            <p class="jam-desc">
+              <span data-de>Verteidige dein Zuhause.</span>
+              <span data-en>Protect your home.</span>
+            </p>
+            <span class="jam-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
 
         <a class="jam-card" href="games/shadow.html">
           <div class="jam-media">
             <img src="img/ShadowThumb.png" alt="What's your Shadow">
-            <!-- <video src="img/shadow.mp4" loop playsinline muted></video> -->
-            <div class="jam-placeholder">Bild + Video:<br>img/shadow.jpg &amp; .mp4</div>
             <button class="play-btn" aria-label="Video abspielen">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
             </button>
@@ -390,8 +386,14 @@
             <span class="jam-badge">4-Day Game Jam</span>
             <h3 class="jam-title">What's your Shadow</h3>
             <p class="jam-event">Game Jam · 2024</p>
-            <p class="jam-desc">You are the Enemy</p>
-            <span class="jam-arrow">Mehr erfahren →</span>
+            <p class="jam-desc">
+              <span data-de>Du bist der Feind.</span>
+              <span data-en>You are the enemy.</span>
+            </p>
+            <span class="jam-arrow">
+              <span data-de>Mehr erfahren →</span>
+              <span data-en>Learn more →</span>
+            </span>
           </div>
         </a>
 
@@ -399,7 +401,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-inner">
       <div class="about-visual">
@@ -408,10 +409,22 @@
         <p class="about-placeholder">Dein Foto<br>hier einfügen</p>
       </div>
       <div>
-        <p class="about-label">Über mich</p>
-        <h2 class="about-title">Ich bin Eszter —<br><em>independent</em> Game Creator</h2>
-        <p class="about-text">Bevor ich überhaupt laufen konnte hatte ich bereits einen Controller in der Hand und lernte die Welt der Videospiele kennen und hab mich in diese verliebt. Schnell habe ich gemerkt, dass ich selber solch Welten erschaffen möchte und hab mir das zu meinem Ziel gesetzt.</p>
-        <p class="about-text">Ich bin ausgebildete Game Creatorin und habe bereits mehrere Spiele von grundauf alleine gebaut von der Idee über den code bis zu 3D und Texturen.</p>
+        <p class="about-label">
+          <span data-de>Über mich</span>
+          <span data-en>About me</span>
+        </p>
+        <h2 class="about-title">
+          <span data-de>Ich bin Eszter —<br><em>independent</em> Game Creator</span>
+          <span data-en>I'm Eszter —<br><em>independent</em> Game Creator</span>
+        </h2>
+        <p class="about-text">
+          <span data-de>Bevor ich überhaupt laufen konnte hatte ich bereits einen Controller in der Hand und lernte die Welt der Videospiele kennen und hab mich in diese verliebt. Schnell habe ich gemerkt, dass ich selber solch Welten erschaffen möchte und hab mir das zu meinem Ziel gesetzt.</span>
+          <span data-en>Before I could even walk, I already had a controller in my hands — and fell in love with the world of video games. I quickly realized I wanted to create these worlds myself, and made it my goal.</span>
+        </p>
+        <p class="about-text">
+          <span data-de>Ich bin ausgebildete Game Creatorin und habe bereits mehrere Spiele von grundauf alleine gebaut von der Idee über den Code bis zu 3D und Texturen.</span>
+          <span data-en>I'm a trained game creator and have built several games entirely from scratch on my own — from concept and code to 3D assets and textures.</span>
+        </p>
         <div class="skills-grid">
           <div class="skill-item"><div class="skill-dot"></div>Game Design</div>
           <div class="skill-item"><div class="skill-dot"></div>Pixel Art</div>
@@ -424,15 +437,26 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div style="text-align:center">
-      <p class="section-eyebrow" style="color:var(--horror-accent2)">Kontakt</p>
-      <h2 class="section-title" style="color:var(--horror-text);margin-bottom:1rem">Lass uns gern reden.</h2>
+      <p class="section-eyebrow" style="color:var(--horror-accent2)">
+        <span data-de>Kontakt</span>
+        <span data-en>Contact</span>
+      </p>
+      <h2 class="section-title" style="color:var(--horror-text);margin-bottom:1rem">
+        <span data-de>Lass uns gern reden.</span>
+        <span data-en>Let's talk.</span>
+      </h2>
     </div>
-    <p class="contact-sub">Für Kollaborationen, Feedback oder einfach um Hallo zu sagen.</p>
+    <p class="contact-sub">
+      <span data-de>Für Kollaborationen, Feedback oder einfach um Hallo zu sagen.</span>
+      <span data-en>For collaborations, feedback, or just to say hello.</span>
+    </p>
     <div class="contact-links">
-      <a href="mailto:deine@email.com" class="contact-link primary">E-Mail schreiben</a>
+      <a href="mailto:deine@email.com" class="contact-link primary">
+        <span data-de>E-Mail schreiben</span>
+        <span data-en>Send an email</span>
+      </a>
       <a href="https://itch.io" target="_blank" class="contact-link">itch.io</a>
       <a href="https://tiktok.com" target="_blank" class="contact-link">TikTok</a>
     </div>
@@ -444,21 +468,38 @@
   </footer>
 
   <script>
+    // ── SPRACHE ──
+    function setLang(lang) {
+      localStorage.setItem('lang', lang);
+      applyLang(lang);
+    }
+
+    function applyLang(lang) {
+      document.querySelectorAll('[data-de]').forEach(el => el.style.display = lang === 'de' ? '' : 'none');
+      document.querySelectorAll('[data-en]').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.textContent.toLowerCase() === lang) btn.classList.add('active');
+      });
+      document.documentElement.lang = lang;
+    }
+
+    // Gespeicherte Sprache laden (Standard: DE)
+    const savedLang = localStorage.getItem('lang') || 'de';
+    applyLang(savedLang);
+
+    // ── VIDEOS ──
     document.querySelectorAll('.play-btn').forEach(btn => {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-
         const media = this.closest('.card-media, .jam-media');
         const video = media.querySelector('video');
-
-        if (!video) return; // kein Video vorhanden
-
+        if (!video) return;
         if (media.classList.contains('playing')) {
           video.pause();
           media.classList.remove('playing');
         } else {
-          // Alle anderen Videos stoppen
           document.querySelectorAll('.card-media.playing, .jam-media.playing').forEach(m => {
             m.querySelector('video').pause();
             m.classList.remove('playing');
@@ -469,7 +510,6 @@
       });
     });
 
-    // Video gestoppt wenn es zu Ende ist
     document.querySelectorAll('video').forEach(v => {
       v.addEventListener('ended', () => {
         v.closest('.card-media, .jam-media').classList.remove('playing');
