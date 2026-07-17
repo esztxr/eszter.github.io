@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Eszter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Quicksand', sans-serif; background: #0b0805; color: #f0e2cb; min-height: 100vh; overflow-x: clip; }
+    @keyframes flicker {
+      0%, 100% { opacity: .85; }
+      45% { opacity: 1; }
+      55% { opacity: .72; }
+      70% { opacity: .95; }
+    }
+
+    nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 16px 8vw; background: rgba(11,8,5,.82); backdrop-filter: blur(10px); border-bottom: 1px solid #2e2417; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 24px; color: #f6e6cc; text-decoration: none; letter-spacing: .5px; }
+    .nav-back { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; color: #d8c4a2; text-decoration: none; letter-spacing: .3px; }
+    .nav-back:hover { color: #f5b45c; }
+
+    .blog-header { position: relative; text-align: center; padding: 96px 8vw 48px; }
+    .blog-header .glow { position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(240,178,90,.14), rgba(240,178,90,0) 65%); animation: flicker 6s infinite ease-in-out; pointer-events: none; }
+    .blog-eyebrow { position: relative; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #f0b25a; margin-bottom: 16px; }
+    .blog-header h1 { position: relative; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.6rem, 6vw, 4rem); color: #f8ecd6; line-height: 1.05; }
+    .blog-header h1 em { font-style: italic; color: #f5b45c; }
+    .blog-header p { position: relative; color: #cbb896; font-size: 15px; margin-top: 14px; line-height: 1.6; }
+
+    .blog-list { max-width: 760px; margin: 0 auto; padding: 2rem 8vw 8rem; }
+
+    /* Filter tabs */
+    .blog-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .filter-btn { background: none; border: 1px solid #4a3924; color: #cbb896; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.95rem; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: #f5b45c; color: #f8ecd6; }
+    .filter-btn.active { background: #f5b45c; border-color: #f5b45c; color: #140d08; }
+
+    /* Entry */
+    .blog-entry {
+      display: block; text-decoration: none;
+      border: 1px solid #4a3924; border-radius: 14px;
+      background: linear-gradient(180deg, #1d160e, #130d07);
+      padding: 26px 28px; margin-bottom: 18px;
+      box-shadow: 0 18px 44px -30px rgba(0,0,0,.8);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .blog-entry:hover { transform: translateY(-3px); border-color: #6f5230; }
+    .entry-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
+    .entry-date { font-size: 0.75rem; color: #f0b25a; letter-spacing: 0.08em; }
+    .entry-cat { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid #6f5230; border-radius: 20px; color: #ecd4ac; }
+    .entry-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: #f8ecd6; margin-bottom: 0.5rem; line-height: 1.15; }
+    .entry-excerpt { font-size: 0.9rem; color: #cbb896; line-height: 1.65; }
+    .entry-read { font-size: 0.72rem; color: #f5b45c; margin-top: 0.9rem; display: block; letter-spacing: 0.08em; font-weight: 700; text-transform: uppercase; }
+
+    footer { padding: 2rem 8vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2a2013; }
+    .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #cbb896; }
+    .footer-copy { font-size: 0.78rem; color: #8a7a5c; }
+    @media (max-width: 600px) { nav { padding: 14px 6vw; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="../index.html">Eszter</a>
+    <a class="nav-back" href="../index.html">← Back</a>
+  </nav>
+
+  <div class="blog-header">
+    <div class="glow"></div>
+    <p class="blog-eyebrow">Devlogs &amp; Thoughts</p>
+    <h1>My <em>Blog</em></h1>
+    <p>Behind the scenes of my games. Honest, personal, unfiltered.</p>
+  </div>
+
+  <div class="blog-list">
+
+    <div class="blog-filter">
+      <button class="filter-btn active" onclick="filterBlog('all', this)">All</button>
+      <button class="filter-btn" onclick="filterBlog('devlog', this)">Devlog</button>
+      <button class="filter-btn" onclick="filterBlog('behind the scenes', this)">Behind the Scenes</button>
+      <button class="filter-btn" onclick="filterBlog('game jam', this)">Game Jam</button>
+      <button class="filter-btn" onclick="filterBlog('thoughts', this)">Thoughts</button>
+    </div>
+
+    <!--
+      ADD A NEW ENTRY:
+      1. Copy one .blog-entry block
+      2. Adjust href, date, category (data-cat), title and excerpt
+      3. Insert the newest entries at the TOP
+      4. Create the matching HTML file in the blog/ folder (template = vorlage.html)
+    -->
+
+    <a class="blog-entry" href="eintrag-1.html" data-cat="devlog">
+      <div class="entry-meta">
+        <span class="entry-date">July 18, 2026</span>
+        <span class="entry-cat">Devlog</span>
+      </div>
+      <div class="entry-title">I'm building a horror game. And honestly? It terrifies me.</div>
+      <div class="entry-excerpt">How a scaredy-cat who can't play horror games ended up making one.</div>
+      <span class="entry-read">Read more →</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <span class="footer-name">Eszter</span>
+    <span class="footer-copy">© 2026 — All rights reserved</span>
+  </footer>
+
+  <script>
+    function filterBlog(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.blog-entry').forEach(entry => {
+        if (cat === 'all' || entry.dataset.cat === cat) {
+          entry.style.display = 'block';
+        } else {
+          entry.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

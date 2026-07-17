@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robo Jobo INC. — Eszter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#6E7FC9; }
+  *{ box-sizing:border-box; }
+  html, body{ margin:0; padding:0; }
+  ::selection{ background: rgba(110,127,201,0.28); }
+  img{ max-width:100%; display:block; }
+  .zoomable{ cursor:zoom-in; }
+  .lb-overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:999; align-items:center; justify-content:center; padding:40px; }
+  .lb-overlay.open{ display:flex; }
+  .lb-overlay img{ max-width:100%; max-height:100%; border-radius:6px; }
+  .lb-close{ position:fixed; top:24px; right:32px; background:none; border:none; color:#C8CFE0; font-size:28px; cursor:pointer; }
+  .photo-placeholder{ aspect-ratio:4/3; border-radius:10px; border:1px solid rgba(200,207,224,0.12); background:repeating-linear-gradient(135deg,#171825 0 12px,#13141e 12px 24px); display:flex; align-items:center; justify-content:center; text-align:center; font-family:ui-monospace,'SF Mono',monospace; font-size:11px; letter-spacing:0.05em; color:#555e75; text-transform:uppercase; }
+
+  /* --- Nav-Dropdown oben rechts --- */
+  .nav-menu{ position:relative; }
+  .nav-menu-btn{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:42px; height:38px; background:none; border:1px solid rgba(200,207,224,0.25); border-radius:6px; cursor:pointer; padding:0; }
+  .nav-menu-btn:hover{ border-color:rgba(200,207,224,0.5); }
+  .nav-menu-btn span{ display:block; width:18px; height:1.5px; background:#C8CFE0; }
+  .nav-dropdown{ display:none; position:absolute; top:calc(100% + 8px); right:0; min-width:230px; background:#151721; border:1px solid rgba(200,207,224,0.14); border-radius:10px; padding:8px; box-shadow:0 20px 40px -16px rgba(0,0,0,0.6); z-index:50; }
+  .nav-menu.open .nav-dropdown,
+  .nav-menu:hover .nav-dropdown{ display:block; }
+  .nav-dropdown a{ display:block; padding:9px 12px; border-radius:6px; color:#AEB4C8; text-decoration:none; font-size:14px; }
+  .nav-dropdown a:hover{ background:rgba(200,207,224,0.08); color:#E4E8F2; }
+  .nav-dropdown .nav-group-label{ padding:8px 12px 4px; font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#8890A8; }
+  .nav-dropdown hr{ border:none; border-top:1px solid rgba(200,207,224,0.1); margin:6px 4px; }
+
+  /* --- Tab Navigation --- */
+  .tab-nav{ position:sticky; top:73px; z-index:15; background:rgba(13,14,19,0.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(200,207,224,0.08); margin:0 -40px 56px; padding:0 40px; }
+  .tab-nav-inner{ max-width:1180px; margin:0 auto; display:flex; gap:8px; padding:14px 0; flex-wrap:wrap; }
+  .tab-btn{ background:none; border:1px solid rgba(200,207,224,0.18); color:#8890A8; font-family:'Hanken Grotesk',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.04em; padding:10px 20px; border-radius:20px; cursor:pointer; transition:all .15s ease; }
+  .tab-btn:hover{ border-color:rgba(200,207,224,0.4); color:#E4E8F2; }
+  .tab-btn.active{ background:var(--accent); border-color:var(--accent); color:#0d0e13; }
+  .tab-panel{ scroll-margin-top:150px; }
+
+  /* --- Video (Klick zum Abspielen, lokale Datei) --- */
+  .video-block{ margin:36px 0; }
+  .video-frame{ position:relative; width:100%; border-radius:10px; overflow:hidden; border:1px solid rgba(200,207,224,0.12); background:#0b0c11; aspect-ratio:16/9; }
+  .video-frame video{ width:100%; height:100%; display:block; object-fit:cover; }
+  .video-poster{ position:absolute; inset:0; cursor:pointer; background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center; }
+  .video-poster::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,0.25); }
+  .video-play-btn{ position:relative; width:64px; height:64px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; }
+  .video-play-btn::after{ content:""; border-style:solid; border-width:11px 0 11px 18px; border-color:transparent transparent transparent #0d0e13; margin-left:4px; }
+  .video-caption, .shot-caption{ font-size:12.5px; color:#8890A8; letter-spacing:0.04em; margin:12px 2px 0; line-height:1.5; }
+
+  /* --- Hero --- */
+  .hero-frame{ position:relative; aspect-ratio:16/8; }
+  .hero-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+</style>
+</head>
+<body>
+
+<div style="min-height:100vh; background:#0d0e13; color:#C8CFE0; font-family:'Hanken Grotesk',system-ui,sans-serif; -webkit-font-smoothing:antialiased;">
+
+  <header style="position:sticky; top:0; z-index:20; background:rgba(13,14,19,0.88); backdrop-filter:blur(10px); border-bottom:1px solid rgba(200,207,224,0.08);">
+    <div style="max-width:1180px; margin:0 auto; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="../index.html" style="font-family:'Newsreader',serif; font-size:23px; letter-spacing:0.01em; color:#E4E8F2; text-decoration:none;">Eszter</a>
+
+      <div style="display:flex; align-items:center; gap:22px;">
+        <a href="../index.html" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#8890A8; font-size:12.5px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">
+          <span style="font-size:15px; line-height:1;">←</span> Back
+        </a>
+
+        <div class="nav-menu" id="navMenu">
+          <button class="nav-menu-btn" id="navMenuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-dropdown">
+            <a href="../index.html">Homepage</a>
+            <a href="../blog/index.html">Blog</a>
+            <hr>
+            <div class="nav-group-label">Horror</div>
+            <a href="horror1.html">Early Access</a>
+            <a href="horror2.html">Shell Market</a>
+            <hr>
+            <div class="nav-group-label">Cozy</div>
+            <a href="boxventure.html">Boxventure</a>
+            <a href="spirits.html">SPIRITS</a>
+            <a href="yura.html">Yura and the Fallen Star</a>
+            <hr>
+            <div class="nav-group-label">Game Jams</div>
+            <span style="display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-radius:6px; color:#555e75; font-size:14px;">Robo Jobo INC. <span style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase;">Current</span></span>
+            <a href="frogoff.html">Frog Off</a>
+            <a href="shadow.html">What's your Shadow</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1180px; margin:0 auto; padding:0 40px 120px;">
+
+    <section style="padding:88px 0 56px;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:26px;">
+        <span style="width:26px; height:1px; background:var(--accent);"></span>
+        <span style="font-size:12px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent);">4-Day Game Jam · 2024</span>
+      </div>
+      <h1 style="font-family:'Newsreader',serif; font-weight:400; font-size:78px; line-height:1.0; letter-spacing:-0.015em; margin:0 0 22px; color:#E4E8F2; max-width:14ch;">Robo Jobo INC.</h1>
+      <p style="font-size:21px; line-height:1.5; color:#8890A8; max-width:52ch; margin:0 0 34px; font-weight:400;">Provide every robot with the job it was built for. A chaotic little management game made in four days.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="https://esztxr.itch.io/robo-jobo-inc" target="_blank" style="text-decoration:none; background:var(--accent); color:#0d0e13; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Play on itch.io</a>
+        <a href="https://www.tiktok.com/@veloregames" target="_blank" style="text-decoration:none; border:1px solid rgba(200,207,224,0.25); color:#E4E8F2; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Follow on TikTok</a>
+      </div>
+    </section>
+
+    <!-- HERO: Bild. Wenn du ein Video hast, ersetze das <img> durch den Video-Block aus dem Screenshots-Tab. -->
+    <section class="hero-frame" style="margin-bottom:56px; border-radius:14px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.7); border:1px solid rgba(200,207,224,0.07);">
+      <img src="../img/Robojobo (1).png" alt="Robo Jobo INC. Hero">
+    </section>
+
+    <!-- Tab Navigation: klicken statt scrollen -->
+    <nav class="tab-nav">
+      <div class="tab-nav-inner">
+        <button class="tab-btn" data-tab="about">ABOUT THE GAME</button>
+        <button class="tab-btn" data-tab="screenshots">SCREENSHOTS</button>
+        <button class="tab-btn" data-tab="fourdays">THE 4 DAYS</button>
+      </div>
+    </nav>
+
+    <div style="display:grid; grid-template-columns:260px 1fr; gap:80px; align-items:start;">
+
+      <aside style="position:sticky; top:150px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:22px;">
+          <span style="font-size:11.5px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent);">At a glance</span>
+        </div>
+        <dl style="margin:0; border-top:1px solid rgba(200,207,224,0.15);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(200,207,224,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8890A8; margin:0;">Format</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E4E8F2; margin:0; text-align:right;">4-Day Jam</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(200,207,224,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8890A8; margin:0;">Jam</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E4E8F2; margin:0; text-align:right;">HTK · Fire Edition</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(200,207,224,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8890A8; margin:0;">Theme</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E4E8F2; margin:0; text-align:right;">Retrofuturism</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(200,207,224,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8890A8; margin:0;">Year</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E4E8F2; margin:0; text-align:right;">2024</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div style="max-width:640px;">
+
+        <!-- TAB 1: About the game -->
+        <div class="tab-panel" data-panel="about" id="panel-about" style="margin-bottom:88px;">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E4E8F2;">About the game</h2>
+          <p style="font-size:18px; line-height:1.72; color:#AEB4C8; margin:0 0 26px;">Robo Jobo Inc. is a management game with attitude. Every day a fresh batch of robots clocks in, and it's your job to match each one with the work it was built for. In a world that runs on cold retrofuturistic efficiency, there's no room for mistakes.</p>
+
+          <figure style="margin:44px 0; padding:0 0 0 26px; border-left:3px solid var(--accent);">
+            <p style="font-family:'Newsreader',serif; font-style:italic; font-size:21px; line-height:1.5; color:#C8CFE0; margin:0;">"Listen up, mortal creatures! Welcome to Robo Jobo Inc. In this world, there is no room for mistakes. Your job is to assign the right tasks to various robots every day. These robots are the backbone of our society, and it's up to you to ensure each of them performs their best work. Remember, every mistake can have serious consequences. The future of our world depends on your decisions. Show us that you can handle the responsibility. Your probationary period starts NOW! (3 days left from now)"</p>
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#AEB4C8; margin:0 0 26px;">Your daily duty is to provide robots with suitable jobs, giving them meaning in life by choosing the right robo job with your trusted skills. You can decide between 5 job fields with 3 subcategories each. Should you send the chef back to its kitchen, or should he start a new career as a V-Tuber? It's up to you, and only you. The company trusts in you (promised).</p>
+        </div>
+
+        <!-- TAB 2: Screenshots -->
+        <div class="tab-panel" data-panel="screenshots" id="panel-screenshots" style="margin-bottom:88px;">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E4E8F2;">Screenshots</h2>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/Robojobo (2).png" alt="Robo Jobo INC. Screenshot" style="width:100%; border-radius:10px; border:1px solid rgba(200,207,224,0.1);">
+            <p class="shot-caption">Add a short caption for this screenshot.</p>
+          </figure>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/Robojobo (3).png" alt="Robo Jobo INC. Screenshot" style="width:100%; border-radius:10px; border:1px solid rgba(200,207,224,0.1);">
+            <p class="shot-caption">Add a short caption for this screenshot.</p>
+          </figure>
+
+          <!--
+            VIDEO MIT KLICK ZUM ABSPIELEN:
+            1. Lade dein Video in den "img" Ordner und trage den Dateinamen in src ein
+            2. Trage ein Vorschaubild (Standbild) für background-image ein
+            3. Das Video startet erst beim Klick auf den Play-Button
+          -->
+          <div class="video-block">
+            <div class="video-frame">
+              <div class="video-poster" style="background-image:url('../img/Robojobo (4).png');" onclick="playVideo(this)">
+                <div class="video-play-btn"></div>
+              </div>
+              <video controls playsinline>
+                <source src="../img/DEIN-VIDEO.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="video-caption">Add your video caption here.</p>
+          </div>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/Robojobo (5).png" alt="Robo Jobo INC. Screenshot" style="width:100%; border-radius:10px; border:1px solid rgba(200,207,224,0.1);">
+            <p class="shot-caption">Add a short caption for this screenshot.</p>
+          </figure>
+        </div>
+
+        <!-- TAB 3: The 4 days -->
+        <div class="tab-panel" data-panel="fourdays" id="panel-fourdays">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E4E8F2;">The 4 days</h2>
+          <p style="font-size:18px; line-height:1.72; color:#AEB4C8; margin:0 0 26px;">Robo Jobo Inc. was created in four days for the HTK Game Jam 2024, Fire Edition, built around the theme "Retrofuturism." The jam ran from May 13th, 9:00 AM, to May 17th, 2024.</p>
+          <p style="font-size:18px; line-height:1.72; color:#AEB4C8; margin:0 0 26px;">I made the game together with five other people. My focus was on writing all of the in-game text and creating the 3D assets, giving the whole robotic world its voice and its look.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid rgba(200,207,224,0.08);">
+    <div style="max-width:1180px; margin:0 auto; padding:34px 40px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+      <span style="font-family:'Newsreader',serif; font-size:18px; color:#AEB4C8;">Eszter</span>
+      <span style="font-size:12.5px; color:#8890A8; letter-spacing:0.04em;">Robo Jobo INC. · 4-Day Game Jam</span>
+    </div>
+  </footer>
+
+</div>
+
+<div class="lb-overlay" id="lb">
+  <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<script>
+  // Lightbox Zoom
+  document.querySelectorAll('.zoomable').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      document.getElementById('lb-img').src = img.src;
+      document.getElementById('lb').classList.add('open');
+    });
+  });
+  document.getElementById('lb').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('lb').classList.remove('open'); });
+
+  // Tabs = Sprungmarken
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-'+btn.dataset.tab).scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+
+  // Aktiven Tab beim Scrollen mitlaufen lassen
+  const panels = document.querySelectorAll('.tab-panel');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const scrollSpy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        tabBtns.forEach(b=>b.classList.remove('active'));
+        document.querySelector('.tab-btn[data-tab="'+entry.target.dataset.panel+'"]').classList.add('active');
+      }
+    });
+  }, { rootMargin:'-160px 0px -60% 0px' });
+  panels.forEach(p=>scrollSpy.observe(p));
+
+  // Dropdown Menü (Klick zusätzlich zu Hover, für Touch-Geräte)
+  const navMenu = document.getElementById('navMenu');
+  const navMenuBtn = document.getElementById('navMenuBtn');
+  navMenuBtn.addEventListener('click', (e)=>{ e.stopPropagation(); navMenu.classList.toggle('open'); navMenuBtn.setAttribute('aria-expanded', navMenu.classList.contains('open')); });
+  document.addEventListener('click', ()=>{ navMenu.classList.remove('open'); navMenuBtn.setAttribute('aria-expanded','false'); });
+
+  // Video im Screenshots Tab: Klick auf Vorschaubild startet die Wiedergabe
+  function playVideo(posterEl){
+    const frame = posterEl.closest('.video-frame');
+    const video = frame.querySelector('video');
+    posterEl.style.display = 'none';
+    video.style.display = 'block';
+    video.play();
+  }
+</script>
+
+</body>
+</html>

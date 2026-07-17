@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yura and the Fallen Star — Eszter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#C79A4B; }
+  *{ box-sizing:border-box; }
+  html, body{ margin:0; padding:0; }
+  ::selection{ background: rgba(199,154,75,0.25); }
+  img{ max-width:100%; display:block; }
+  .zoomable{ cursor:zoom-in; }
+  .lb-overlay{ display:none; position:fixed; inset:0; background:rgba(20,15,10,0.92); z-index:999; align-items:center; justify-content:center; padding:40px; }
+  .lb-overlay.open{ display:flex; }
+  .lb-overlay img{ max-width:100%; max-height:100%; border-radius:6px; }
+  .lb-close{ position:fixed; top:24px; right:32px; background:none; border:none; color:#F6EFE3; font-size:28px; cursor:pointer; }
+  .photo-placeholder{ aspect-ratio:4/3; border-radius:10px; border:1px solid rgba(42,35,28,0.08); background:repeating-linear-gradient(135deg,#E6D8C4 0 12px,#E1D2BC 12px 24px); display:flex; align-items:center; justify-content:center; text-align:center; font-family:ui-monospace,'SF Mono',monospace; font-size:11px; letter-spacing:0.05em; color:#9A876E; text-transform:uppercase; }
+
+  /* --- Nav-Dropdown oben rechts --- */
+  .nav-menu{ position:relative; }
+  .nav-menu-btn{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:42px; height:38px; background:none; border:1px solid rgba(42,35,28,0.2); border-radius:6px; cursor:pointer; padding:0; }
+  .nav-menu-btn:hover{ border-color:rgba(42,35,28,0.4); }
+  .nav-menu-btn span{ display:block; width:18px; height:1.5px; background:#2A231C; }
+  .nav-dropdown{ display:none; position:absolute; top:calc(100% + 8px); right:0; min-width:230px; background:#F6EFE3; border:1px solid rgba(42,35,28,0.14); border-radius:10px; padding:8px; box-shadow:0 20px 40px -16px rgba(60,40,24,0.35); z-index:50; }
+  .nav-menu.open .nav-dropdown,
+  .nav-menu:hover .nav-dropdown{ display:block; }
+  .nav-dropdown a{ display:block; padding:9px 12px; border-radius:6px; color:#463D33; text-decoration:none; font-size:14px; }
+  .nav-dropdown a:hover{ background:rgba(42,35,28,0.06); color:#241D16; }
+  .nav-dropdown .nav-group-label{ padding:8px 12px 4px; font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#8A7B69; }
+  .nav-dropdown hr{ border:none; border-top:1px solid rgba(42,35,28,0.1); margin:6px 4px; }
+</style>
+</head>
+<body>
+
+<div style="min-height:100vh; background:#F6EFE3; color:#2A231C; font-family:'Hanken Grotesk',system-ui,sans-serif; -webkit-font-smoothing:antialiased;">
+
+  <header style="position:sticky; top:0; z-index:20; background:rgba(246,239,227,0.82); backdrop-filter:blur(10px); border-bottom:1px solid rgba(42,35,28,0.09);">
+    <div style="max-width:1180px; margin:0 auto; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="../index.html" style="font-family:'Newsreader',serif; font-size:23px; letter-spacing:0.01em; color:#2A231C; text-decoration:none;">Eszter</a>
+
+      <div style="display:flex; align-items:center; gap:22px;">
+        <a href="../index.html" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#6B5E50; font-size:12.5px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">
+          <span style="font-size:15px; line-height:1;">←</span> Back
+        </a>
+
+        <div class="nav-menu" id="navMenu">
+          <button class="nav-menu-btn" id="navMenuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-dropdown">
+            <a href="../index.html">Homepage</a>
+            <a href="../blog/index.html">Blog</a>
+            <hr>
+            <div class="nav-group-label">Horror</div>
+            <a href="horror1.html">Early Access</a>
+            <a href="horror2.html">Shell Market</a>
+            <hr>
+            <div class="nav-group-label">Cozy</div>
+            <a href="boxventure.html">Boxventure</a>
+            <a href="spirits.html">SPIRITS</a>
+            <a href="yura.html">Yura and the Fallen Star</a>
+            <hr>
+            <div class="nav-group-label">Game Jams</div>
+            <a href="robojobo.html">Robo Jobo INC.</a>
+            <a href="frogoff.html">Frog Off</a>
+            <a href="shadow.html">What's your Shadow</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1180px; margin:0 auto; padding:0 40px 120px;">
+
+    <section style="padding:88px 0 56px;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:26px;">
+        <span style="width:26px; height:1px; background:var(--accent);"></span>
+        <span style="font-size:12px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent);">Narrative · Wholesome</span>
+      </div>
+      <h1 style="font-family:'Newsreader',serif; font-weight:400; font-size:72px; line-height:1.02; letter-spacing:-0.015em; margin:0 0 22px; color:#241D16; max-width:14ch;">Yura and the Fallen Star</h1>
+      <p style="font-size:21px; line-height:1.5; color:#5A4E42; max-width:52ch; margin:0 0 34px; font-weight:400;">A gentle journey about care, warmth, and the quiet beauty of small moments.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="https://esztxr.itch.io/" target="_blank" style="text-decoration:none; background:var(--accent); color:#2A231C; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Play on itch.io</a>
+        <a href="https://www.tiktok.com/@veloregames" target="_blank" style="text-decoration:none; border:1px solid rgba(42,35,28,0.25); color:#2A231C; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Follow on TikTok</a>
+      </div>
+    </section>
+
+    <div style="display:grid; grid-template-columns:260px 1fr; gap:80px; align-items:start;">
+
+      <aside style="position:sticky; top:110px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:22px;">
+          <span style="font-size:11.5px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent);">At a glance</span>
+        </div>
+        <dl style="margin:0; border-top:1px solid rgba(42,35,28,0.12);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(42,35,28,0.1);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7B69; margin:0;">Genre</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#2E2820; margin:0; text-align:right;">Narrative</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(42,35,28,0.1);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7B69; margin:0;">Mood</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#2E2820; margin:0; text-align:right;">Wholesome</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(42,35,28,0.1);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7B69; margin:0;">Engine</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#2E2820; margin:0; text-align:right;">Unreal Engine</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(42,35,28,0.1);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7B69; margin:0;">Year</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#2E2820; margin:0; text-align:right;">2024</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div style="max-width:640px;">
+        <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#241D16;">About the game</h2>
+
+        <p style="font-size:18px; line-height:1.72; color:#463D33; margin:0 0 26px;">One night, a little star falls from the sky and breaks into pieces. In a cozy, peaceful town, you take on the role of Yura, who sets out to collect the lost star fragments and help it gather enough strength to find its way back home.</p>
+
+        <p style="font-size:18px; line-height:1.72; color:#463D33; margin:0 0 26px;">Wander through charming streets, soak in the soothing atmosphere, and watch as the star slowly regains its light. It's a simple yet heartfelt journey about care, warmth, and the quiet beauty of small moments, one you can take entirely at your own pace.</p>
+
+        <ul style="list-style:none; margin:0 0 26px; padding:0;">
+          <li style="font-size:18px; line-height:1.7; color:#463D33; padding-left:26px; position:relative; margin-bottom:10px;"><span style="position:absolute; left:0; color:var(--accent);">✦</span> A relaxing and cozy experience</li>
+          <li style="font-size:18px; line-height:1.7; color:#463D33; padding-left:26px; position:relative; margin-bottom:10px;"><span style="position:absolute; left:0; color:var(--accent);">✦</span> Explore a peaceful town at your own pace</li>
+          <li style="font-size:18px; line-height:1.7; color:#463D33; padding-left:26px; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">✦</span> Bring the fallen star back to life</li>
+        </ul>
+
+        <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:80px 0 28px; color:#241D16;">The story behind it</h2>
+
+        <p style="font-size:18px; line-height:1.72; color:#463D33; margin:0 0 26px;">With Yura, I wanted to experiment with a completely different look. My goal was to build a world that feels hand-painted in watercolor, one that says a lot with very few details, where everything looks just slightly softer and stranger than it "should."</p>
+
+        <p style="font-size:18px; line-height:1.72; color:#463D33; margin:0 0 26px;">That gentle, imperfect style became the heart of the whole game. Instead of chasing realism, I leaned into mood and atmosphere, letting the washed-out colors and loose shapes carry the feeling of a quiet little storybook town.</p>
+
+        <div style="margin-top:64px;">
+          <p style="font-size:11.5px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin:0 0 22px;">Screenshots</p>
+          <!--
+            BILDER EINFÜGEN:
+            1. Lade deine Screenshots in den "img" Ordner im Repo hoch
+            2. Ersetze jede photo-placeholder div durch:
+               <img class="zoomable" src="../img/DATEINAME.jpg" alt="Beschreibung" style="aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid rgba(42,35,28,0.08);">
+          -->
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+            <div class="photo-placeholder">Screenshot 1<br><small>img/yura-1.jpg</small></div>
+            <div class="photo-placeholder">Screenshot 2<br><small>img/yura-2.jpg</small></div>
+            <div class="photo-placeholder">Screenshot 3<br><small>img/yura-3.jpg</small></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid rgba(42,35,28,0.09);">
+    <div style="max-width:1180px; margin:0 auto; padding:34px 40px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+      <span style="font-family:'Newsreader',serif; font-size:18px; color:#3A322A;">Eszter</span>
+      <span style="font-size:12.5px; color:#8A7B69; letter-spacing:0.04em;">Yura and the Fallen Star · Game Design Portfolio · 2024</span>
+    </div>
+  </footer>
+
+</div>
+
+<div class="lb-overlay" id="lb">
+  <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<script>
+  document.querySelectorAll('.zoomable').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      document.getElementById('lb-img').src = img.src;
+      document.getElementById('lb').classList.add('open');
+    });
+  });
+  document.getElementById('lb').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('lb').classList.remove('open'); });
+
+  // Dropdown Menü (Klick zusätzlich zu Hover, für Touch-Geräte)
+  const navMenu = document.getElementById('navMenu');
+  const navMenuBtn = document.getElementById('navMenuBtn');
+  if(navMenuBtn){
+    navMenuBtn.addEventListener('click', (e)=>{ e.stopPropagation(); navMenu.classList.toggle('open'); navMenuBtn.setAttribute('aria-expanded', navMenu.classList.contains('open')); });
+    document.addEventListener('click', ()=>{ navMenu.classList.remove('open'); navMenuBtn.setAttribute('aria-expanded','false'); });
+  }
+</script>
+
+</body>
+</html>

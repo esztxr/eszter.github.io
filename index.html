@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eszter — Game Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0b0805; font-family: 'Quicksand', sans-serif; }
+  @keyframes flicker {
+    0%, 100% { opacity: .85; }
+    45% { opacity: 1; }
+    55% { opacity: .72; }
+    70% { opacity: .95; }
+  }
+  img { max-width: 100%; display: block; }
+  .card-media { width: 100%; height: 220px; position: relative; overflow: hidden; background: #17110c; }
+  .card-media img, .card-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-media video { position: absolute; inset: 0; display: none; }
+  .card-media.playing video { display: block; }
+  .card-media.playing img { display: none; }
+  .jam-media { width: 100%; height: 200px; position: relative; overflow: hidden; background: #17110c; }
+  .jam-media img, .jam-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .jam-media video { position: absolute; inset: 0; display: none; }
+  .jam-media.playing video { display: block; }
+  .jam-media.playing img { display: none; }
+</style>
+</head>
+<body>
+
+<div style="font-family: 'Quicksand', sans-serif;">
+
+  <nav style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 16px 8vw; background: rgba(11,8,5,.82); backdrop-filter: blur(10px); border-bottom: 1px solid #2e2417;">
+    <a href="#top" style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 24px; color: #f6e6cc; text-decoration: none; letter-spacing: .5px;">Eszter</a>
+    <div style="display: flex; gap: 30px;">
+      <a href="#games" style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; color: #d8c4a2; text-decoration: none; letter-spacing: .3px;">Games</a>
+      <a href="#gamejam" style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; color: #d8c4a2; text-decoration: none; letter-spacing: .3px;">Game Jams</a>
+      <a href="#about" style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; color: #d8c4a2; text-decoration: none; letter-spacing: .3px;">About</a>
+      <a href="#blog" style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; color: #d8c4a2; text-decoration: none; letter-spacing: .3px;">Blog</a>
+      <a href="#kontakt" style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; color: #d8c4a2; text-decoration: none; letter-spacing: .3px;">Contact</a>
+    </div>
+  </nav>
+
+  <span id="top"></span>
+
+  <!-- ===== GAMES ===== -->
+  <section id="games" style="position: relative; scroll-margin-top: 64px; background: radial-gradient(120% 80% at 20% 0%, #2c2013, #140d08 55%, #0b0805); color: #f0e2cb; padding: 90px 8vw 116px; overflow: hidden;">
+    <div style="position: absolute; top: -80px; left: 8%; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(240,178,90,.16), rgba(240,178,90,0) 65%); animation: flicker 5s infinite ease-in-out; pointer-events: none;"></div>
+
+    <div style="position: relative; max-width: 720px; margin-bottom: 64px;">
+      <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #f0b25a; margin-bottom: 18px;">Portfolio</div>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 54px; line-height: 1.03; margin: 0 0 16px; color: #f8ecd6;">Two Worlds.<br>One Developer.</h2>
+      <p style="font-size: 17px; line-height: 1.6; color: #cbb896; margin: 0; max-width: 560px;">From cozy games to atmospheric horror experiences. Click a card to open the game.</p>
+    </div>
+
+    <div style="position: relative; display: flex; flex-direction: column; gap: 60px;">
+
+     
+      <!-- Horror & Atmospheric -->
+      <div>
+        <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px;">
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 30px; margin: 0; color: #f5b45c;">Horror &amp; Atmospheric</h3>
+          <span style="flex: 1; height: 1px; background: linear-gradient(90deg, #6a4f2e, transparent);"></span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; align-items: stretch;">
+
+          <a href="games/horror1.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -26px rgba(0,0,0,.8);">
+            <div class="card-media">
+              <img src="img/EarlyAccessthumb.png" alt="Early Access">
+              <div style="position: absolute; top: 12px; left: 12px; font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 1px; color: #140d08; background: #f5b45c; padding: 4px 10px; border-radius: 20px;">PUBLISHED</div>
+            </div>
+            <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px; line-height: 1.1; color: #f8ecd6;">Early Access</div>
+              <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a; margin-top: 6px;">Murder Mystery · 1970s Hotel</div>
+              <p style="font-size: 14.5px; line-height: 1.6; color: #cbb896; margin: 14px 0 0;">You playtest a murder mystery game set in a 1970s hotel, but soon unexplainable things start happening.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px;">
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Horror</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Atmospheric</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Indie</span>
+              </div>
+              <div style="margin-top: auto; padding-top: 18px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 13px; color: #f5b45c;">View Game →</div>
+            </div>
+          </a>
+
+          <a href="games/horror2.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -26px rgba(0,0,0,.8);">
+            <div class="card-media" style="background: repeating-linear-gradient(45deg, #1c1614, #1c1614 10px, #14100e 10px, #14100e 20px); display: flex; align-items: center; justify-content: center;">
+              <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: rgba(240,226,203,.55);">[ product shot ]</div>
+              <div style="position: absolute; top: 12px; left: 12px; font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 1px; color: #140d08; background: #f5b45c; padding: 4px 10px; border-radius: 20px;">WIP</div>
+            </div>
+            <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px; line-height: 1.1; color: #f8ecd6;">Shell Market</div>
+              <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a; margin-top: 6px;">In Development</div>
+              <p style="font-size: 14.5px; line-height: 1.6; color: #cbb896; margin: 14px 0 0;">In development :) Follow me on TikTok for updates and behind the scenes.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px;">
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Horror</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Coming Soon</span>
+              </div>
+              <div style="margin-top: auto; padding-top: 18px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 13px; color: #f5b45c;">View Game →</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Cozy & Wholesome -->
+      <div>
+        <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px;">
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 30px; margin: 0; color: #f5b45c;">Cozy &amp; Wholesome</h3>
+          <span style="flex: 1; height: 1px; background: linear-gradient(90deg, #6a4f2e, transparent);"></span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; align-items: stretch;">
+
+          <a class="game-card" href="games/boxventure.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -26px rgba(0,0,0,.8);">
+            <div class="card-media" onmouseenter="this.classList.add('playing'); const v=this.querySelector('video'); if(v){v.currentTime=0; v.play();}" onmouseleave="this.classList.remove('playing'); const v=this.querySelector('video'); if(v){v.pause();}">
+              <img src="img/Boxventure%20(1).png" alt="Boxventure">
+              <video src="img/BoxventureHoverVideo.mp4" loop muted playsinline></video>
+            </div>
+            <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px; line-height: 1.1; color: #f8ecd6;">Boxventure</div>
+              <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a; margin-top: 6px;">Jump 'n' Run · Adventure</div>
+              <p style="font-size: 14.5px; line-height: 1.6; color: #cbb896; margin: 14px 0 0;">A cozy jump 'n' run adventure to unwind with, made with heart and a little box as the hero.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px;">
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Cozy</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Adventure</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Jump 'n' Run</span>
+              </div>
+              <div style="margin-top: auto; padding-top: 18px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 13px; color: #f5b45c;">View Game →</div>
+            </div>
+          </a>
+
+          <a href="games/spirits.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -26px rgba(0,0,0,.8);">
+            <div class="card-media">
+              <img src="img/SpiritsThumb.png" alt="SPIRITS">
+            </div>
+            <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px; line-height: 1.1; color: #f8ecd6;">SPIRITS</div>
+              <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a; margin-top: 6px;">Pixel · Jump 'n' Run</div>
+              <p style="font-size: 14.5px; line-height: 1.6; color: #cbb896; margin: 14px 0 0;">A pixel jump 'n' run with a special atmosphere, quiet, moody, mysterious.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px;">
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Pixel Art</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Jump 'n' Run</span>
+              </div>
+              <div style="margin-top: auto; padding-top: 18px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 13px; color: #f5b45c;">View Game →</div>
+            </div>
+          </a>
+
+          <a href="games/yura.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -26px rgba(0,0,0,.8);">
+            <div class="card-media">
+              <img src="img/YuraThumb.png" alt="Yura and the Fallen Star">
+            </div>
+            <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px; line-height: 1.1; color: #f8ecd6;">Yura and the Fallen Star</div>
+              <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a; margin-top: 6px;">Relaxing · Wholesome</div>
+              <p style="font-size: 14.5px; line-height: 1.6; color: #cbb896; margin: 14px 0 0;">A calm journey to bring a fallen star back to life.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px;">
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Relaxing</span>
+                <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 11px; color: #ecd4ac; border: 1px solid #6f5230; padding: 4px 11px; border-radius: 20px;">Wholesome</span>
+              </div>
+              <div style="margin-top: auto; padding-top: 18px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 13px; color: #f5b45c;">View Game →</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GAME JAMS ===== -->
+  <section id="gamejam" style="position: relative; scroll-margin-top: 64px; background: #080603; color: #f0e2cb; padding: 90px 8vw 100px; border-top: 1px dashed #4a3924; border-bottom: 1px dashed #4a3924;">
+    <div style="position: relative; max-width: 760px; margin-bottom: 54px;">
+      <div style="display: inline-block; font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #140d08; background: #f5b45c; padding: 5px 12px; border-radius: 3px; transform: rotate(-1.5deg); margin-bottom: 20px;">Game Jams · 4 Days</div>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 50px; line-height: 1.03; margin: 0 0 14px; color: #f8ecd6;">96 Hours. Chaos. Magic.</h2>
+      <p style="font-size: 16px; line-height: 1.6; color: #c4b088; margin: 0; max-width: 520px;">These games were made within 4 days, raw, fast, and full of heart.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 26px;">
+
+      <a href="games/robojobo.html" style="text-decoration: none; flex: 1 1 280px; min-width: 260px; transform: rotate(-1.2deg); display: block;">
+        <div style="border: 1px dashed #6f5230; border-radius: 10px; background: repeating-linear-gradient(180deg, #150f09, #150f09 26px, #120c07 26px, #120c07 27px); overflow: hidden;">
+          <div class="jam-media">
+            <img src="img/RoboThumb.png" alt="Robo Jobo INC.">
+          </div>
+          <div style="padding: 16px 18px 20px;">
+            <div style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #f0b25a; margin-bottom: 6px;">Game Jam · 2024</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; color: #f8ecd6;">Robo Jobo INC.</div>
+            <p style="font-size: 13.5px; line-height: 1.55; color: #cbb896; margin: 8px 0 0;">provide robots with suitable jobs</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="games/frogoff.html" style="text-decoration: none; flex: 1 1 280px; min-width: 260px; transform: rotate(1.4deg); display: block;">
+        <div style="border: 1px dashed #6f5230; border-radius: 10px; background: repeating-linear-gradient(180deg, #150f09, #150f09 26px, #120c07 26px, #120c07 27px); overflow: hidden;">
+          <div class="jam-media" onmouseenter="this.classList.add('playing'); const v=this.querySelector('video'); if(v){v.currentTime=0; v.play();}" onmouseleave="this.classList.remove('playing'); const v=this.querySelector('video'); if(v){v.pause();}">
+            <img src="img/Frogthumb.png" alt="Frog Off">
+            <video src="img/FrogClips.mp4" loop muted playsinline></video>
+          </div>
+          <div style="padding: 16px 18px 20px;">
+            <div style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #f0b25a; margin-bottom: 6px;">Game Jam · 2024</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; color: #f8ecd6;">Frog Off</div>
+            <p style="font-size: 13.5px; line-height: 1.55; color: #cbb896; margin: 8px 0 0;">Protect your home</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="games/shadow.html" style="text-decoration: none; flex: 1 1 280px; min-width: 260px; transform: rotate(-0.8deg); display: block;">
+        <div style="border: 1px dashed #6f5230; border-radius: 10px; background: repeating-linear-gradient(180deg, #150f09, #150f09 26px, #120c07 26px, #120c07 27px); overflow: hidden;">
+          <div class="jam-media">
+            <img src="img/ShadowThumb.png" alt="What's your Shadow">
+          </div>
+          <div style="padding: 16px 18px 20px;">
+            <div style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #f0b25a; margin-bottom: 6px;">Game Jam · 2024</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; color: #f8ecd6;">What's your Shadow</div>
+            <p style="font-size: 13.5px; line-height: 1.55; color: #cbb896; margin: 8px 0 0;">You are the Enemy</p>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" style="position: relative; scroll-margin-top: 64px; background: radial-gradient(120% 80% at 80% 100%, #2c2013, #140d08 55%, #0b0805); color: #f0e2cb; padding: 96px 8vw; overflow: hidden;">
+    <div style="position: absolute; bottom: -100px; right: 6%; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(240,178,90,.14), rgba(240,178,90,0) 65%); animation: flicker 6s infinite ease-in-out; pointer-events: none;"></div>
+
+    <div style="position: relative; display: flex; flex-wrap: wrap; gap: 56px; align-items: center;">
+      <div style="flex: 0 0 300px;">
+        <div style="width: 300px; height: 380px; border-radius: 14px; border: 1px solid #6f5230; background: repeating-linear-gradient(45deg, #221812, #221812 12px, #18110c 12px, #18110c 24px); display: flex; align-items: center; justify-content: center; box-shadow: 0 24px 60px -30px rgba(0,0,0,.9);">
+          <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: rgba(240,226,203,.6);">[ your photo here ]</div>
+        </div>
+      </div>
+
+      <div style="flex: 1 1 420px;">
+        <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #f0b25a; margin-bottom: 18px;">About Me</div>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 46px; line-height: 1.05; margin: 0 0 24px; color: #f8ecd6;">I'm Eszter —<br><span style="font-style: italic; color: #f5b45c;">independent</span> Game Creator</h2>
+        <p style="font-size: 16px; line-height: 1.7; color: #cbb896; margin: 0 0 16px; max-width: 560px;">Before I could even walk, I already had a controller in my hands, and I fell in love with the world of video games. It quickly became clear: I wanted to create worlds like that myself.</p>
+        <p style="font-size: 16px; line-height: 1.7; color: #cbb896; margin: 0 0 30px; max-width: 560px;">I'm a trained game creator and I've already built several games from the ground up on my own, from the idea, through the code, to 3D and textures.</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 13px; color: #ecd4ac; border: 1px solid #6f5230; padding: 7px 15px; border-radius: 24px;">Game Design</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 13px; color: #ecd4ac; border: 1px solid #6f5230; padding: 7px 15px; border-radius: 24px;">Pixel Art</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 13px; color: #ecd4ac; border: 1px solid #6f5230; padding: 7px 15px; border-radius: 24px;">Unity</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 13px; color: #ecd4ac; border: 1px solid #6f5230; padding: 7px 15px; border-radius: 24px;">Sound Design</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 13px; color: #ecd4ac; border: 1px solid #6f5230; padding: 7px 15px; border-radius: 24px;">Storytelling</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 13px; color: #ecd4ac; border: 1px solid #6f5230; padding: 7px 15px; border-radius: 24px;">Level Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG ===== -->
+  <section id="blog" style="position: relative; scroll-margin-top: 64px; background: #080603; color: #f0e2cb; padding: 96px 8vw 110px; border-top: 1px dashed #4a3924;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; max-width: 1100px; margin-bottom: 48px;">
+      <div>
+        <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #f0b25a; margin-bottom: 16px;">Journal</div>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 50px; line-height: 1.02; margin: 0; color: #f8ecd6;">My <span style="font-style: italic; color: #f5b45c;">Blog</span></h2>
+      </div>
+      <a href="blog/index.html" style="font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 14px; color: #f5b45c; text-decoration: none;">View All Posts →</a>
+    </div>
+
+    <div style="max-width: 720px;">
+
+      <a href="blog/eintrag-1.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -28px rgba(0,0,0,.8);">
+        <!-- BLOG COVER: hier später ein Bild einfügen -> <img src="img/DEIN-COVER.png" alt="..." style="width:100%; height:190px; object-fit:cover; display:block;"> und dieses Platzhalter-div ersetzen -->
+        <div style="position: relative; height: 190px; background: repeating-linear-gradient(45deg, #241a10, #241a10 12px, #1a130c 12px, #1a130c 24px); display: flex; align-items: center; justify-content: center; font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: rgba(240,226,203,.55);">
+          [ cover image ]
+          <span style="position: absolute; top: 14px; left: 14px; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1px; color: #140d08; background: #f5b45c; padding: 4px 10px; border-radius: 20px;">LATEST</span>
+        </div>
+        <div style="padding: 24px 26px 28px;">
+          <div style="display: flex; align-items: center; gap: 12px; font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a;">
+            <span>July 18, 2026</span><span style="color: #6f5230;">/</span><span style="color: #ecd4ac;">Devlog</span>
+          </div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 30px; line-height: 1.12; color: #f8ecd6; margin-top: 14px;">I'm building a horror game. And honestly? It terrifies me.</div>
+          <p style="font-size: 15px; line-height: 1.6; color: #cbb896; margin: 12px 0 0;">How a scaredy-cat who can't play horror games ended up making one.</p>
+          <div style="margin-top: 20px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 13px; color: #f5b45c;">Read More →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <footer id="kontakt" style="position: relative; scroll-margin-top: 64px; background: radial-gradient(120% 120% at 50% 0%, #2c2013, #120c07 60%, #0b0805); color: #f0e2cb; padding: 96px 8vw 56px; border-top: 1px solid #4a3924; overflow: hidden;">
+    <div style="position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(240,178,90,.12), rgba(240,178,90,0) 65%); animation: flicker 6s infinite ease-in-out; pointer-events: none;"></div>
+
+    <div style="position: relative; max-width: 640px; margin: 0 auto 44px; text-align: center;">
+      <div style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #f0b25a; margin-bottom: 16px;">Contact</div>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 46px; line-height: 1.04; margin: 0 0 14px; color: #f8ecd6;">Say <span style="font-style: italic; color: #f5b45c;">Hello</span></h2>
+      <p style="font-size: 16px; line-height: 1.6; color: #cbb896; margin: 0;">Questions, collaborations, or just a friendly hello, I'd love to hear from you.</p>
+    </div>
+
+    <div style="position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; max-width: 780px; margin: 0 auto;">
+
+      <a href="https://www.tiktok.com/@veloregames" target="_blank" style="display: flex; align-items: center; gap: 12px; text-decoration: none; border: 1px solid #4a3924; border-radius: 30px; background: linear-gradient(180deg, #1d160e, #130d07); padding: 13px 22px 13px 16px;">
+        <span style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f5b45c; color: #140d08; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 17px;">T</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.2;">
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a;">TIKTOK</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 14px; color: #f8ecd6;">@veloregames</span>
+        </span>
+      </a>
+
+      <a href="mailto:hallo@eszter.dev" style="display: flex; align-items: center; gap: 12px; text-decoration: none; border: 1px solid #4a3924; border-radius: 30px; background: linear-gradient(180deg, #1d160e, #130d07); padding: 13px 22px 13px 16px;">
+        <span style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f5b45c; color: #140d08; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 17px;">@</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.2;">
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a;">E-MAIL</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 14px; color: #f8ecd6;">hallo@eszter.dev</span>
+        </span>
+      </a>
+
+      <a href="https://esztxr.itch.io/" target="_blank" style="display: flex; align-items: center; gap: 12px; text-decoration: none; border: 1px solid #4a3924; border-radius: 30px; background: linear-gradient(180deg, #1d160e, #130d07); padding: 13px 22px 13px 16px;">
+        <span style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f5b45c; color: #140d08; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 17px;">i</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.2;">
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a;">ITCH.IO</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 14px; color: #f8ecd6;">esztxr.itch.io</span>
+        </span>
+      </a>
+
+      <a href="https://discord.gg/4heXWGcy29" target="_blank" style="display: flex; align-items: center; gap: 12px; text-decoration: none; border: 1px solid #4a3924; border-radius: 30px; background: linear-gradient(180deg, #1d160e, #130d07); padding: 13px 22px 13px 16px;">
+        <span style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f5b45c; color: #140d08; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 17px;">D</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.2;">
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; color: #f0b25a;">DISCORD</span>
+          <span style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 14px; color: #f8ecd6;">Join Server</span>
+        </span>
+      </a>
+
+    </div>
+
+    <div style="position: relative; text-align: center; margin-top: 56px; padding-top: 24px; border-top: 1px solid #2a2013; font-family: 'Quicksand', sans-serif; font-weight: 400; font-size: 12px; color: #8a7a5c;">
+      © 2025 Eszter · Independent Game Creator
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

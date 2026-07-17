@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Early Access — Eszter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#A13B3B; }
+  *{ box-sizing:border-box; }
+  html, body{ margin:0; padding:0; }
+  ::selection{ background: rgba(161,59,59,0.3); }
+  img{ max-width:100%; display:block; }
+  .zoomable{ cursor:zoom-in; }
+  .lb-overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:999; align-items:center; justify-content:center; padding:40px; }
+  .lb-overlay.open{ display:flex; }
+  .lb-overlay img{ max-width:100%; max-height:100%; border-radius:6px; }
+  .lb-close{ position:fixed; top:24px; right:32px; background:none; border:none; color:#D9CFC0; font-size:28px; cursor:pointer; }
+  .photo-placeholder{ aspect-ratio:4/3; border-radius:10px; border:1px solid rgba(217,207,192,0.12); background:repeating-linear-gradient(135deg,#1c1712 0 12px,#181410 12px 24px); display:flex; align-items:center; justify-content:center; text-align:center; font-family:ui-monospace,'SF Mono',monospace; font-size:11px; letter-spacing:0.05em; color:#6b5f52; text-transform:uppercase; }
+
+  /* --- Nav-Dropdown oben rechts --- */
+
+  .nav-menu{ position:relative; }
+  .nav-menu-btn{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:42px; height:38px; background:none; border:1px solid rgba(217,207,192,0.25); border-radius:6px; cursor:pointer; padding:0; }
+  .nav-menu-btn:hover{ border-color:rgba(217,207,192,0.5); }
+  .nav-menu-btn span{ display:block; width:18px; height:1.5px; background:#D9CFC0; }
+  .nav-dropdown{ display:none; position:absolute; top:calc(100% + 8px); right:0; min-width:230px; background:#1c1712; border:1px solid rgba(217,207,192,0.14); border-radius:10px; padding:8px; box-shadow:0 20px 40px -16px rgba(0,0,0,0.6); z-index:50; }
+  .nav-menu.open .nav-dropdown,
+  .nav-menu:hover .nav-dropdown{ display:block; }
+  .nav-dropdown a{ display:block; padding:9px 12px; border-radius:6px; color:#C4B8A6; text-decoration:none; font-size:14px; }
+  .nav-dropdown a:hover{ background:rgba(217,207,192,0.08); color:#E6DED2; }
+  .nav-dropdown .nav-group-label{ padding:8px 12px 4px; font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6b5f52; }
+  .nav-dropdown hr{ border:none; border-top:1px solid rgba(217,207,192,0.1); margin:6px 4px; }
+
+  /* --- Tab Navigation --- */
+  .tab-nav{ position:sticky; top:73px; z-index:15; background:rgba(20,16,11,0.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(217,207,192,0.08); margin:0 -40px 56px; padding:0 40px; }
+  .tab-nav-inner{ max-width:1180px; margin:0 auto; display:flex; gap:8px; padding:14px 0; flex-wrap:wrap; }
+  .tab-btn{ background:none; border:1px solid rgba(217,207,192,0.18); color:#9A8C7A; font-family:'Hanken Grotesk',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.04em; padding:10px 20px; border-radius:20px; cursor:pointer; transition:all .15s ease; }
+  .tab-btn:hover{ border-color:rgba(217,207,192,0.4); color:#D9CFC0; }
+  .tab-btn.active{ background:var(--accent); border-color:var(--accent); color:#F3E9E0; }
+  .tab-panel{ scroll-margin-top:150px; }
+
+  /* --- Video (Klick zum Abspielen) --- */
+  .video-block{ margin:36px 0; }
+  .video-frame{ position:relative; width:100%; border-radius:10px; overflow:hidden; border:1px solid rgba(217,207,192,0.12); background:#0e0b08; aspect-ratio:16/9; }
+  .video-frame video{ width:100%; height:100%; display:block; object-fit:cover; }
+  .video-poster{ position:absolute; inset:0; cursor:pointer; background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center; }
+  .video-poster::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,0.25); }
+  .video-play-btn{ position:relative; width:64px; height:64px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; }
+  .video-play-btn::after{ content:""; border-style:solid; border-width:11px 0 11px 18px; border-color:transparent transparent transparent #F3E9E0; margin-left:4px; }
+  .video-caption, .shot-caption{ font-size:12.5px; color:#8A7C6B; letter-spacing:0.04em; margin:12px 2px 0; line-height:1.5; }
+
+  /* --- Hero Video (Klick startet YouTube Video) --- */
+  .hero-frame{ position:relative; aspect-ratio:16/8; }
+  .hero-play-overlay{ position:absolute; inset:0; cursor:pointer; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.15); transition:background .15s ease; }
+  .hero-play-overlay:hover{ background:rgba(0,0,0,0.3); }
+  .hero-play-btn{ width:76px; height:76px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px -8px rgba(0,0,0,0.6); }
+  .hero-play-btn::after{ content:""; border-style:solid; border-width:13px 0 13px 21px; border-color:transparent transparent transparent #F3E9E0; margin-left:5px; }
+  .hero-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; display:none; }
+</style>
+</head>
+<body>
+
+<div style="min-height:100vh; background:#14100b; color:#D9CFC0; font-family:'Hanken Grotesk',system-ui,sans-serif; -webkit-font-smoothing:antialiased;">
+
+  <header style="position:sticky; top:0; z-index:20; background:rgba(20,16,11,0.88); backdrop-filter:blur(10px); border-bottom:1px solid rgba(217,207,192,0.08);">
+    <div style="max-width:1180px; margin:0 auto; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="../index.html" style="font-family:'Newsreader',serif; font-size:23px; letter-spacing:0.01em; color:#E6DED2; text-decoration:none;">Eszter</a>
+
+      <div style="display:flex; align-items:center; gap:22px;">
+        <a href="../index.html" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#8A7C6B; font-size:12.5px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">
+          <span style="font-size:15px; line-height:1;">←</span> Back
+        </a>
+
+        <!-- Dropdown Menü: hover oder klick öffnet die Liste aller Seiten -->
+        <div class="nav-menu" id="navMenu">
+          <button class="nav-menu-btn" id="navMenuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Menü">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-dropdown">
+            <a href="../index.html">Homepage</a>
+            <a href="../blog/index.html">Blog</a>
+            <hr>
+            <div class="nav-group-label">Horror</div>
+            <span style="display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-radius:6px; color:#6b5f52; font-size:14px;">Early Access <span style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase;">Aktuell</span></span>
+            <a href="horror2.html">Shell Market</a>
+            <hr>
+            <div class="nav-group-label">Cozy</div>
+            <a href="boxventure.html">Boxventure</a>
+            <a href="spirits.html">SPIRITS</a>
+            <a href="yura.html">Yura and the Fallen Star</a>
+            <hr>
+            <div class="nav-group-label">Game Jams</div>
+            <a href="robojobo.html">Robo Jobo INC.</a>
+            <a href="frogoff.html">Frog Off</a>
+            <a href="shadow.html">What's your Shadow</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1180px; margin:0 auto; padding:0 40px 120px;">
+
+    <section style="padding:88px 0 56px;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:26px;">
+        <span style="width:26px; height:1px; background:var(--accent);"></span>
+        <span style="font-size:12px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent);">Horror / Puzzle · Published</span>
+      </div>
+      <h1 style="font-family:'Newsreader',serif; font-weight:400; font-size:88px; line-height:0.98; letter-spacing:-0.015em; margin:0 0 22px; color:#E6DED2; max-width:14ch;">Early Access</h1>
+      <p style="font-size:21px; line-height:1.5; color:#9A8C7A; max-width:52ch; margin:0 0 34px; font-weight:400;">Horror Puzzle Game.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="https://rouru-studios.itch.io/earlyaccess" target="_blank" style="text-decoration:none; background:var(--accent); color:#F3E9E0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Play on itch.io</a>
+        <a href="https://www.tiktok.com/@veloregames" target="_blank" style="text-decoration:none; border:1px solid rgba(217,207,192,0.25); color:#D9CFC0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Follow on TikTok</a>
+      </div>
+    </section>
+
+    <!-- HERO: Bild sichtbar, Klick auf Play startet eingebettetes YouTube Video -->
+    <section class="hero-frame" style="margin-bottom:56px; border-radius:14px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.7); border:1px solid rgba(217,207,192,0.08);">
+      <img src="../img/EarlyAccessthumb.png" alt="Early Access Hero" style="width:100%; height:100%; object-fit:cover; display:block;">
+      <div class="hero-play-overlay" onclick="playHeroVideo(this)">
+        <div class="hero-play-btn"></div>
+      </div>
+      <iframe src="" data-src="https://www.youtube.com/watch?v=wElK9DUT3rk" title="Early Access Trailer" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </section>
+
+    <!-- Tab Navigation: klicken statt scrollen -->
+    <nav class="tab-nav">
+      <div class="tab-nav-inner">
+        <button class="tab-btn" data-tab="ueber">ABOUT THE GAME</button>
+        <button class="tab-btn" data-tab="screenshots">SCREENSHOTS &amp; INSIGHTS</button>
+        <button class="tab-btn" data-tab="entstehung">THE STORY BEHIND IT</button>
+      </div>
+    </nav>
+
+    <div style="display:grid; grid-template-columns:260px 1fr; gap:80px; align-items:start;">
+
+      <aside style="position:sticky; top:150px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:22px;">
+          <span style="font-size:11.5px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent);">AT A GLANCE</span>
+        </div>
+        <dl style="margin:0; border-top:1px solid rgba(217,207,192,0.15);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Status</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Published</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Genre</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Horror / Puzzle</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Engine</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Unreal Engine</dd>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
+            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Year</dt>
+            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">2025</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div style="max-width:640px;">
+
+        <!-- TAB 1: About the game -->
+        <div class="tab-panel" data-panel="ueber" id="panel-ueber" style="margin-bottom:88px;">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">About the game</h2>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">You said yes to playtesting their game.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">A message pops up on your screen.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">You download the game. Your PC warns you it might be unsafe. You ignore the warning.<strong style="color:#E6DED2;">You ignore the warning.</strong></p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">The game starts. You're immediately connected to a Discord call with the friendly devs, who guide you through their atmospheric murder mystery set in a beautifully old 1970s hotel.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">One dev even actively fixes bugs as you report them.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">But suddenly, things start to feel off.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Rooms appear that shouldn't exist. You're teleported unpredictably, becoming increasingly disoriented.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Textures vanish, objects distort, the game logic breaks down around you.</p>
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Then you hear laughter and a voice you don't recognize.</p>
+
+          <figure style="margin:44px 0; padding:0 0 0 26px; border-left:3px solid var(--accent);">
+            <p style="font-family:'Newsreader',serif; font-style:italic; font-size:25px; line-height:1.4; color:#E6DED2; margin:0;">„Someone else is here. And they're changing everything"</p>
+          </figure>
+
+          <p style="font-size:15px; line-height:1.6; color:#8A7C6B; font-style:italic; margin:0 0 26px;">Can you escape the game?</p>
+        </div>
+
+        <!-- TAB 2: Screenshots & Einblicke -->
+        <div class="tab-panel" data-panel="screenshots" id="panel-screenshots" style="margin-bottom:88px;">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">Screenshots &amp; Einblicke</h2>
+
+          <!--
+            SCREENSHOT MIT BILDUNTERSCHRIFT:
+            Ersetze DATEINAME und schreib deinen eigenen Text in den <p class="shot-caption">.
+            Ein Block = ein großes Bild + Text darunter. Einfach den ganzen <figure>...</figure> Block kopieren für mehr Screenshots.
+          -->
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccess (6).png" alt="Screenshot Early Access" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+            <p class="shot-caption">A behind the scenes look at the game, showing both the hotel lobby and the connection status that tells you the devs are still watching over your session.</p>
+          </figure>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccess (7).png" alt="Screenshot Early Access" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+            <p class="shot-caption">A peek into one of the hotel rooms, though it looks like the 3D artist forgot to place the NPCs.</p>
+          </figure>
+
+          <!--
+            VIDEO MIT KLICK ZUM ABSPIELEN:
+            1. Lade dein Video in den "img" Ordner hoch und trage den Dateinamen bei src ein
+            2. Trage bei background-image ein Vorschaubild (Standbild/Thumbnail) ein
+            3. Das Video startet erst, wenn man auf den Play-Button klickt, kein Autoplay
+          -->
+          <div class="video-block">
+            <div class="video-frame">
+              <div class="video-poster" style="background-image:url('../img/EarlyAccess (4).png');" onclick="playVideo(this)">
+                <div class="video-play-btn"></div>
+              </div>
+              <video controls playsinline>
+                <source src="../img/DEIN-VIDEO.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+              </video>
+            </div>
+            <p class="video-caption">A short level playable in the style of my third semester project, where you control the little box character.</p>
+          </div>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccess (2).png" alt="Screenshot Early Access" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+            <p class="shot-caption">Hier deine Bildunterschrift zum Screenshot.</p>
+          </figure>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccess (1).png" alt="Screenshot Early Access" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+            <p class="shot-caption">The hotel hallway, right as the game slowly starts falling apart around you.</p>
+          </figure>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccess (8).png" alt="Screenshot Early Access" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+            <p class="shot-caption">Close up shots of individual props from the hotel room, showing more detail in the 3D assets.</p>
+          </figure>
+        </div>
+
+        <!-- TAB 3: Wie das Spiel entstand -->
+        <div class="tab-panel" data-panel="entstehung" id="panel-entstehung">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">The story behind it</h2>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Early access was my first duo game. We had four months, and I got to learn a lot along the way.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Before this, I had only ever organized myself over a long stretch of time, planning my own schedule alone. This project taught me what it means to organize as a team of two, and how to make sure both people are actually happy with how things are running.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">In the beginning, I pitched my colleague around 20 possible game ideas, and together we picked one. Of course it was still just a rough concept at that point, so I developed it further, and we kept coming back to it together, figuring out what could still be improved, until we finally arrived at the game it is today.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">From there we got straight to work and split the tasks: Simon was responsible for coding, making sure everything ran smoothly and worked the way it should, while I was in charge of everything visual, from 3D and 2D art to level design, game design, and lighting.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">This semester I got to learn a lot about lighting specifically, and I really improved in that area, which helped me communicate mood and atmosphere much more effectively.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">But what I loved most was watching how we grew together, both as a team and through the project itself.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">And my biggest takeaway, the thing that helped us more than anything: communication and trust. That is the key to so much of this.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid rgba(217,207,192,0.08);">
+    <div style="max-width:1180px; margin:0 auto; padding:34px 40px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+      <span style="font-family:'Newsreader',serif; font-size:18px; color:#C4B8A6;">Eszter</span>
+      <span style="font-size:12.5px; color:#8A7C6B; letter-spacing:0.04em;">Early Access · Game Design Portfolio · 2025</span>
+    </div>
+  </footer>
+
+</div>
+
+<div class="lb-overlay" id="lb">
+  <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<script>
+  // Lightbox Zoom
+  document.querySelectorAll('.zoomable').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      document.getElementById('lb-img').src = img.src;
+      document.getElementById('lb').classList.add('open');
+    });
+  });
+  document.getElementById('lb').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('lb').classList.remove('open'); });
+
+  // Tabs = Sprungmarken. Alles bleibt untereinander lesbar, die Tabs sind nur eine Abkürzung.
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-'+btn.dataset.tab).scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+
+  // Aktiven Tab beim normalen Scrollen automatisch mitlaufen lassen
+  const panels = document.querySelectorAll('.tab-panel');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const scrollSpy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        tabBtns.forEach(b=>b.classList.remove('active'));
+        document.querySelector('.tab-btn[data-tab="'+entry.target.dataset.panel+'"]').classList.add('active');
+      }
+    });
+  }, { rootMargin:'-160px 0px -60% 0px' });
+  panels.forEach(p=>scrollSpy.observe(p));
+
+  // Dropdown Menü (Klick zusätzlich zu Hover, für Touch-Geräte)
+  const navMenu = document.getElementById('navMenu');
+  const navMenuBtn = document.getElementById('navMenuBtn');
+  navMenuBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    navMenu.classList.toggle('open');
+    navMenuBtn.setAttribute('aria-expanded', navMenu.classList.contains('open'));
+  });
+  document.addEventListener('click', ()=>{ navMenu.classList.remove('open'); navMenuBtn.setAttribute('aria-expanded','false'); });
+
+  // Video: Klick auf Vorschaubild startet die Wiedergabe
+  function playVideo(posterEl){
+    const frame = posterEl.closest('.video-frame');
+    const video = frame.querySelector('video');
+    posterEl.style.display = 'none';
+    video.style.display = 'block';
+    video.play();
+  }
+
+  // Hero Video: Klick auf Play Button laedt und startet das YouTube Video
+  function playHeroVideo(overlayEl){
+    const frame = overlayEl.closest('.hero-frame');
+    const iframe = frame.querySelector('iframe');
+    iframe.src = iframe.dataset.src;
+    iframe.style.display = 'block';
+    overlayEl.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
