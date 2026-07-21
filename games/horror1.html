@@ -90,7 +90,6 @@
             <div class="nav-group-label">Cozy</div>
             <a href="boxventure.html">Boxventure</a>
             <a href="spirits.html">SPIRITS</a>
-            <a href="yura.html">Yura and the Fallen Star</a>
             <hr>
             <div class="nav-group-label">Game Jams</div>
             <a href="robojobo.html">Robo Jobo INC.</a>
@@ -132,6 +131,7 @@
         <button class="tab-btn" data-tab="ueber">ABOUT THE GAME</button>
         <button class="tab-btn" data-tab="screenshots">SCREENSHOTS &amp; INSIGHTS</button>
         <button class="tab-btn" data-tab="entstehung">THE STORY BEHIND IT</button>
+        <button class="tab-btn" data-tab="making">BEHIND THE SCENES</button>
       </div>
     </nav>
 
@@ -184,9 +184,9 @@
           <p style="font-size:15px; line-height:1.6; color:#8A7C6B; font-style:italic; margin:0 0 26px;">Can you escape the game?</p>
         </div>
 
-        <!-- TAB 2: Screenshots & Einblicke -->
+        <!-- TAB 2: Screenshots & Insights -->
         <div class="tab-panel" data-panel="screenshots" id="panel-screenshots" style="margin-bottom:88px;">
-          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">Screenshots &amp; Einblicke</h2>
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">Screenshots &amp; Insights</h2>
 
           <!--
             SCREENSHOT MIT BILDUNTERSCHRIFT:
@@ -203,28 +203,9 @@
             <p class="shot-caption">A peek into one of the hotel rooms, though it looks like the 3D artist forgot to place the NPCs.</p>
           </figure>
 
-          <!--
-            VIDEO MIT KLICK ZUM ABSPIELEN:
-            1. Lade dein Video in den "img" Ordner hoch und trage den Dateinamen bei src ein
-            2. Trage bei background-image ein Vorschaubild (Standbild/Thumbnail) ein
-            3. Das Video startet erst, wenn man auf den Play-Button klickt, kein Autoplay
-          -->
-          <div class="video-block">
-            <div class="video-frame">
-              <div class="video-poster" style="background-image:url('../img/EarlyAccess (4).png');" onclick="playVideo(this)">
-                <div class="video-play-btn"></div>
-              </div>
-              <video controls playsinline>
-                <source src="../img/DEIN-VIDEO.mp4" type="video/mp4">
-                Dein Browser unterstützt das Video-Tag nicht.
-              </video>
-            </div>
-            <p class="video-caption">A short level playable in the style of my third semester project, where you control the little box character.</p>
-          </div>
-
           <figure style="margin:0 0 44px;">
             <img class="zoomable" src="../img/EarlyAccess (2).png" alt="Screenshot Early Access" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
-            <p class="shot-caption">Hier deine Bildunterschrift zum Screenshot.</p>
+            <p class="shot-caption">Another quiet corner of the hotel, right before things start to shift.</p>
           </figure>
 
           <figure style="margin:0 0 44px;">
@@ -238,8 +219,8 @@
           </figure>
         </div>
 
-        <!-- TAB 3: Wie das Spiel entstand -->
-        <div class="tab-panel" data-panel="entstehung" id="panel-entstehung">
+        <!-- TAB 3: The story behind it -->
+        <div class="tab-panel" data-panel="entstehung" id="panel-entstehung" style="margin-bottom:88px;">
           <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">The story behind it</h2>
 
           <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Early access was my first duo game. We had four months, and I got to learn a lot along the way.</p>
@@ -255,6 +236,115 @@
           <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">But what I loved most was watching how we grew together, both as a team and through the project itself.</p>
 
           <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">And my biggest takeaway, the thing that helped us more than anything: communication and trust. That is the key to so much of this.</p>
+        </div>
+
+        <!-- TAB 4: Behind the Scenes -->
+        <div class="tab-panel" data-panel="making" id="panel-making">
+          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">Behind the Scenes</h2>
+
+          <!--
+            VIDEO OBEN (Durchlauf der Bilder):
+            Trage bei <source src> deinen Video-Dateinamen ein und bei background-image ein Vorschaubild.
+          -->
+          <div class="video-block">
+            <div class="video-frame">
+              <div class="video-poster" style="background-image:url('../img/EarlyAccessBTS.png');" onclick="playVideo(this)">
+                <div class="video-play-btn"></div>
+              </div>
+              <video controls playsinline>
+                <source src="../img/EarlyAccessBTSVideo.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="video-caption">A quick run through the room as it slowly came together.</p>
+          </div>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">In the story behind it I already talked about how much I learned about lighting. What I didn't expect was how hard it would be to actually nail the feeling I wanted.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Early Access is a game inside a game, and that inner game isn't finished. So it couldn't look too polished, but it still had to feel mysterious and a little creepy. Getting both at once was the real challenge.</p>
+
+          <!--
+            BILDER EINFÜGEN: ersetze jede <div class="photo-placeholder"> durch:
+            <img class="zoomable" src="../img/DATEINAME.png" alt="Beschreibung" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          -->
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS.png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">I started with the blockout. First I worked out how big the room should be. Big enough to read as a hotel room, but not so open that it feels off. Then I dropped in the first rough assets and started testing.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Something felt wrong the whole time, and I'm a little embarrassed by how long it took me to see it. My bed was way too big. I honestly walked past it for ages. It only clicked when I stopped and asked myself one thing.</p>
+
+          <figure style="margin:44px 0; padding:0 0 0 26px; border-left:3px solid var(--accent);">
+            <p style="font-family:'Newsreader',serif; font-style:italic; font-size:25px; line-height:1.4; color:#E6DED2; margin:0;">"Okay, how would a player see this for the very first time?"</p>
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">That question saves me every time. It gives me fresh eyes and pulls me out of the spots where I've quietly gotten stuck without noticing. So I'll leave it here for you too.</p>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS2.png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">With the bed fixed, everything suddenly clicked into place. So I moved on to the story parts and started placing the NPCs, thinking about where each piece should sit. Easy enough for the player to follow, but not too easy.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">It's a room where a murder happened, so there are police standing around. Right now they're just blocks, because the 3D designer in the game never got around to modelling them (i swear it's on purpose, story wise xD). So the blocks had to carry the emotion on their own. That part was really fun. I could go bigger and more dramatic with the poses, so you still feel the mood even without real characters.</p>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS (4).png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Once that was set, I showed my colleague everything and moved on to the first textures. We present a prototype every semester, and I wanted mine far enough along to explain where I was taking it.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">The first pass had way too much going on for a room you only sleep in, so I went through a few wallpapers. I also started the lighting early on purpose. I knew it would eat a lot of time and I didn't want to rush it at the end. At first it felt too cold, and the lamp kept bugging me. It just didn't belong and stole all the attention, so I went back in.</p>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS (5).png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">I swapped the lamp for a quieter one, since it doesn't matter for the gameplay anyway, and warmed the light up. But now it felt too cozy, and too dark on top of that. So I started wondering if the light wasn't even the problem. Maybe the room's colors were just too warm.</p>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS (7).png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">So I turned the carpet green. xD It did not help, not even a little. But trying it still mattered, because now I knew that wasn't it. With that ruled out, I could stop guessing and finally tune the light properly.</p>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS (8).png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">The idea was simple. When you first walk in, your eye should land on the murder. Later it should drift to the puzzle. So I kept pushing the lighting until it did that on its own.</p>
+
+          <figure style="margin:0 0 44px;">
+            <img class="zoomable" src="../img/EarlyAccessBTS (6).png" alt="Early Access, behind the scenes" style="width:100%; border-radius:10px; border:1px solid rgba(217,207,192,0.12);">
+          </figure>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">And there it was. The last step was messing the room up a little, because nobody actually lives somewhere this tidy. Things get used, shoved around, and left wherever they land.</p>
+
+          <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:48px 0 26px;">I took the same approach with two more spaces. Here are the foyer and the hallway slowly coming together.</p>
+
+          <div class="video-block">
+            <div class="video-frame">
+              <div class="video-poster" onclick="playVideo(this)">
+                <div class="video-play-btn"></div>
+              </div>
+              <video controls playsinline>
+                <source src="../img/FoyerEntwicklung.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="video-caption">The foyer, built with the same back and forth as the room.</p>
+          </div>
+
+          <div class="video-block">
+            <div class="video-frame">
+              <div class="video-poster" onclick="playVideo(this)">
+                <div class="video-play-btn"></div>
+              </div>
+              <video controls playsinline>
+                <source src="../img/FlurEntwicklung.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="video-caption">And the hallway, same idea all over again.</p>
+          </div>
         </div>
 
       </div>

@@ -54,6 +54,11 @@
   /* --- Hero --- */
   .hero-frame{ position:relative; aspect-ratio:16/8; }
   .hero-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-frame video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none; }
+  .hero-play-overlay{ position:absolute; inset:0; cursor:pointer; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.12); transition:background .15s ease; }
+  .hero-play-overlay:hover{ background:rgba(0,0,0,0.25); }
+  .hero-play-btn{ width:76px; height:76px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px -8px rgba(0,0,0,0.6); }
+  .hero-play-btn::after{ content:""; border-style:solid; border-width:13px 0 13px 21px; border-color:transparent transparent transparent #0d0e13; margin-left:5px; }
 </style>
 </head>
 <body>
@@ -84,7 +89,6 @@
             <div class="nav-group-label">Cozy</div>
             <a href="boxventure.html">Boxventure</a>
             <a href="spirits.html">SPIRITS</a>
-            <a href="yura.html">Yura and the Fallen Star</a>
             <hr>
             <div class="nav-group-label">Game Jams</div>
             <a href="robojobo.html">Robo Jobo INC.</a>
@@ -111,17 +115,23 @@
       </div>
     </section>
 
-    <!-- HERO: Bild. Wenn du ein Video hast, ersetze das <img> durch den Video-Block aus dem Screenshots-Tab. -->
+    <!-- HERO: Bild, Klick startet das Video -->
     <section class="hero-frame" style="margin-bottom:56px; border-radius:14px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.7); border:1px solid rgba(200,207,224,0.07);">
-      <img src="../img/ShadowThumb.png" alt="What's your Shadow Hero">
+      <img src="../img/ShadowThumb.png" alt="What's your Shadow">
+      <video controls playsinline>
+        <source src="../img/WhatsUrShadowVideo.mov" type="video/quicktime">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-play-overlay" onclick="playHeroVideo(this)">
+        <div class="hero-play-btn"></div>
+      </div>
     </section>
 
     <!-- Tab Navigation: klicken statt scrollen -->
     <nav class="tab-nav">
       <div class="tab-nav-inner">
         <button class="tab-btn" data-tab="about">ABOUT THE GAME</button>
-        <button class="tab-btn" data-tab="screenshots">SCREENSHOTS</button>
-        <button class="tab-btn" data-tab="fourdays">THE 4 DAYS</button>
+        <button class="tab-btn" data-tab="fourdays">THE TEAM &amp; JAM</button>
       </div>
     </nav>
 
@@ -160,40 +170,7 @@
           <p style="font-size:18px; line-height:1.72; color:#AEB4C8; margin:0 0 26px;">So… what's your shadow?</p>
         </div>
 
-        <!-- TAB 2: Screenshots -->
-        <div class="tab-panel" data-panel="screenshots" id="panel-screenshots" style="margin-bottom:88px;">
-          <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E4E8F2;">Screenshots</h2>
-
-          <!--
-            BILDER EINFÜGEN:
-            1. Lade deine Screenshots in den "img" Ordner
-            2. Ersetze eine photo-placeholder div durch:
-               <img class="zoomable" src="../img/DATEINAME.png" alt="Beschreibung" style="width:100%; border-radius:10px; border:1px solid rgba(200,207,224,0.1);">
-          -->
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-            <div class="photo-placeholder">Screenshot 1<br><small>img/shadow-1.png</small></div>
-            <div class="photo-placeholder">Screenshot 2<br><small>img/shadow-2.png</small></div>
-          </div>
-
-          <!--
-            VIDEO MIT KLICK ZUM ABSPIELEN (optional):
-            Dateiname in src eintragen und ein Vorschaubild für background-image setzen.
-          -->
-          <div class="video-block">
-            <div class="video-frame">
-              <div class="video-poster" style="background-image:url('../img/ShadowThumb.png');" onclick="playVideo(this)">
-                <div class="video-play-btn"></div>
-              </div>
-              <video controls playsinline>
-                <source src="../img/DEIN-VIDEO.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <p class="video-caption">Add your video caption here.</p>
-          </div>
-        </div>
-
-        <!-- TAB 3: The 4 days -->
+        <!-- TAB 2: The team & the jam -->
         <div class="tab-panel" data-panel="fourdays" id="panel-fourdays">
           <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E4E8F2;">The team &amp; the jam</h2>
           <p style="font-size:18px; line-height:1.72; color:#AEB4C8; margin:0 0 26px;">What's your Shadow was made during the HTK GameJam, Ice Edition 2022, as a school project.</p>
@@ -257,11 +234,13 @@
   navMenuBtn.addEventListener('click', (e)=>{ e.stopPropagation(); navMenu.classList.toggle('open'); navMenuBtn.setAttribute('aria-expanded', navMenu.classList.contains('open')); });
   document.addEventListener('click', ()=>{ navMenu.classList.remove('open'); navMenuBtn.setAttribute('aria-expanded','false'); });
 
-  // Video im Screenshots Tab: Klick auf Vorschaubild startet die Wiedergabe
-  function playVideo(posterEl){
-    const frame = posterEl.closest('.video-frame');
+  // Hero Video: Klick auf Play startet das lokal hinterlegte Video
+  function playHeroVideo(overlayEl){
+    const frame = overlayEl.closest('.hero-frame');
     const video = frame.querySelector('video');
-    posterEl.style.display = 'none';
+    const img = frame.querySelector('img');
+    overlayEl.style.display = 'none';
+    img.style.display = 'none';
     video.style.display = 'block';
     video.play();
   }
