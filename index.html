@@ -138,7 +138,7 @@
           <a class="game-card" href="games/spirits.html" style="display: flex; flex-direction: column; text-decoration: none; border: 1px solid #4a3924; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #1d160e, #130d07); box-shadow: 0 18px 44px -26px rgba(0,0,0,.8);">
             <div class="card-media" onmouseenter="this.classList.add('playing'); const v=this.querySelector('video'); if(v){v.currentTime=0; v.play();}" onmouseleave="this.classList.remove('playing'); const v=this.querySelector('video'); if(v){v.pause();}">
               <img src="img/SpiritsThumb.png" alt="SPIRITS">
-              <video src="img/SpiritsTrailer.mov" loop muted playsinline></video>
+              <video src="img/SpiritsTrailer.mp4" loop muted playsinline></video>
               <div style="position: absolute; top: 12px; left: 12px; font-family: 'Quicksand', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 1px; color: #140d08; background: #f5b45c; padding: 4px 10px; border-radius: 20px;">PUBLISHED</div>
             </div>
             <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1;">
@@ -200,7 +200,7 @@
         <div style="border: 1px dashed #6f5230; border-radius: 10px; background: repeating-linear-gradient(180deg, #150f09, #150f09 26px, #120c07 26px, #120c07 27px); overflow: hidden;">
           <div class="jam-media" onmouseenter="this.classList.add('playing'); const v=this.querySelector('video'); if(v){v.currentTime=0; v.play();}" onmouseleave="this.classList.remove('playing'); const v=this.querySelector('video'); if(v){v.pause();}">
             <img src="img/ShadowThumb.png" alt="What's your Shadow">
-            <video src="img/WhatsUrShadowVideo.mov" loop muted playsinline></video>
+            <video src="img/WhatsUrShadowVideo.mp4" loop muted playsinline style="object-position: center bottom;"></video>
           </div>
           <div style="padding: 16px 18px 20px;">
             <div style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #f0b25a; margin-bottom: 6px;">Game Jam · 2024</div>
@@ -217,7 +217,7 @@
   <section id="about" style="position: relative; scroll-margin-top: 64px; background: radial-gradient(120% 80% at 80% 100%, #2c2013, #140d08 55%, #0b0805); color: #f0e2cb; padding: 96px 8vw; overflow: hidden;">
     <div style="position: absolute; bottom: -100px; right: 6%; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(240,178,90,.14), rgba(240,178,90,0) 65%); animation: flicker 6s infinite ease-in-out; pointer-events: none;"></div>
 
-    <div style="position: relative; display: flex; flex-wrap: wrap; gap: 56px; align-items: center;">
+    <div style="position: relative; display: flex; flex-wrap: wrap; gap: 56px; align-items: center; justify-content: center; max-width: 1000px; margin: 0 auto;">
       <div style="flex: 0 0 300px;">
         <img src="img/ME.jpg" alt="Eszter" style="width: 300px; height: 380px; object-fit: cover; border-radius: 14px; border: 1px solid #6f5230; box-shadow: 0 24px 60px -30px rgba(0,0,0,.9);">
       </div>
