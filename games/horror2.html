@@ -6,45 +6,75 @@
 <title>Shell Market — Eszter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{ --accent:#A13B3B; }
+  :root{ --accent:#F5B45C; --accent-ink:#140D08; }   /* Amber wie auf der Startseite */
   *{ box-sizing:border-box; }
-  html, body{ margin:0; padding:0; }
-  ::selection{ background: rgba(161,59,59,0.3); }
+  html, body{ margin:0; padding:0; overflow-x:clip; }
+  ::selection{ background: rgba(245,180,92,0.28); }
   img{ max-width:100%; display:block; }
   .zoomable{ cursor:zoom-in; }
   .lb-overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:999; align-items:center; justify-content:center; padding:40px; }
   .lb-overlay.open{ display:flex; }
-  .lb-overlay img{ max-width:100%; max-height:100%; border-radius:6px; }
+  .lb-overlay img{ max-width:100%; max-height:100%; border-radius:12px; }
   .lb-close{ position:fixed; top:24px; right:32px; background:none; border:none; color:#D9CFC0; font-size:28px; cursor:pointer; }
-  .photo-placeholder{ aspect-ratio:4/3; border-radius:10px; border:1px solid rgba(217,207,192,0.12); background:repeating-linear-gradient(135deg,#1c1712 0 12px,#181410 12px 24px); display:flex; align-items:center; justify-content:center; text-align:center; font-family:ui-monospace,'SF Mono',monospace; font-size:11px; letter-spacing:0.05em; color:#6b5f52; text-transform:uppercase; }
+  .photo-placeholder{ aspect-ratio:4/3; border-radius:12px; border:1px solid rgba(217,207,192,0.12); background:repeating-linear-gradient(135deg,#1c1712 0 12px,#181410 12px 24px); display:flex; align-items:center; justify-content:center; text-align:center; font-family:ui-monospace,'SF Mono',monospace; font-size:11px; letter-spacing:0.05em; color:#6b5f52; text-transform:uppercase; }
 
   /* --- Nav-Dropdown oben rechts --- */
   .nav-menu{ position:relative; }
-  .nav-menu-btn{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:42px; height:38px; background:none; border:1px solid rgba(217,207,192,0.25); border-radius:6px; cursor:pointer; padding:0; }
+  .nav-menu-btn{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:42px; height:38px; background:none; border:1px solid rgba(217,207,192,0.25); border-radius:12px; cursor:pointer; padding:0; }
   .nav-menu-btn:hover{ border-color:rgba(217,207,192,0.5); }
   .nav-menu-btn span{ display:block; width:18px; height:1.5px; background:#D9CFC0; }
-  .nav-dropdown{ display:none; position:absolute; top:calc(100% + 8px); right:0; min-width:230px; background:#1c1712; border:1px solid rgba(217,207,192,0.14); border-radius:10px; padding:8px; box-shadow:0 20px 40px -16px rgba(0,0,0,0.6); z-index:50; }
+  .nav-dropdown{ display:none; position:absolute; top:calc(100% + 8px); right:0; min-width:230px; background:#1c1712; border:1px solid rgba(217,207,192,0.14); border-radius:12px; padding:8px; box-shadow:0 20px 40px -16px rgba(0,0,0,0.6); z-index:50; }
   .nav-menu.open .nav-dropdown,
   .nav-menu:hover .nav-dropdown{ display:block; }
-  .nav-dropdown a{ display:block; padding:9px 12px; border-radius:6px; color:#C4B8A6; text-decoration:none; font-size:14px; }
+  .nav-dropdown a{ display:block; padding:9px 12px; border-radius:12px; color:#C4B8A6; text-decoration:none; font-size:14px; }
   .nav-dropdown a:hover{ background:rgba(217,207,192,0.08); color:#E6DED2; }
-  .nav-dropdown .nav-group-label{ padding:8px 12px 4px; font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6b5f52; }
+  .nav-dropdown .nav-group-label{ padding:8px 12px 4px; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6b5f52; }
   .nav-dropdown hr{ border:none; border-top:1px solid rgba(217,207,192,0.1); margin:6px 4px; }
+
+  /* --- Kleinere Bildschirme: Handy und Tablet --- */
+  @media (max-width: 900px){
+    .header-inner{ padding:16px 22px !important; gap:14px !important; }
+    .page-main{ padding:0 22px 84px !important; }
+    .footer-inner{ padding:26px 22px !important; }
+    .page-intro{ padding:56px 0 40px !important; }
+    .page-title{ font-size:clamp(38px, 10vw, 62px) !important; }
+    .page-lede{ font-size:18px !important; }
+    .detail-grid{ grid-template-columns:1fr !important; gap:40px !important; }
+    .detail-aside{ position:static !important; top:auto !important; }
+    .detail-body{ max-width:none !important; }
+    .hero-frame{ aspect-ratio:16/10; }
+    .tab-nav{ top:65px; margin:0 -22px 36px; padding:0 22px; }
+    .tab-nav-inner{ flex-wrap:nowrap; overflow-x:auto; gap:6px; padding:11px 0; scrollbar-width:none; }
+    .tab-nav-inner::-webkit-scrollbar{ display:none; }
+    .tab-btn{ font-size:12px; padding:8px 15px; white-space:nowrap; }
+    .tab-panel{ scroll-margin-top:118px; }
+    .lb-overlay{ padding:16px; }
+    .lb-close{ top:12px; right:16px; }
+  }
+  @media (max-width: 560px){
+    .header-inner{ padding:14px 18px !important; }
+    .page-main{ padding:0 18px 64px !important; }
+    .footer-inner{ padding:22px 18px !important; flex-direction:column; align-items:flex-start; gap:8px !important; }
+    .page-title{ font-size:clamp(34px, 11vw, 48px) !important; }
+    .hero-frame{ aspect-ratio:4/3; }
+    .tab-nav{ margin:0 -18px 32px; padding:0 18px; }
+    .nav-back-label{ display:none; }
+  }
 </style>
 </head>
 <body>
 
-<div style="min-height:100vh; background:#14100b; color:#D9CFC0; font-family:'Hanken Grotesk',system-ui,sans-serif; -webkit-font-smoothing:antialiased;">
+<div style="min-height:100vh; background:#14100b; color:#D9CFC0; font-family:'Quicksand',system-ui,sans-serif; -webkit-font-smoothing:antialiased;">
 
   <header style="position:sticky; top:0; z-index:20; background:rgba(20,16,11,0.88); backdrop-filter:blur(10px); border-bottom:1px solid rgba(217,207,192,0.08);">
-    <div style="max-width:1180px; margin:0 auto; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
-      <a href="../index.html" style="font-family:'Newsreader',serif; font-size:23px; letter-spacing:0.01em; color:#E6DED2; text-decoration:none;">Eszter</a>
+    <div class="header-inner" style="max-width:1180px; margin:0 auto; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="../index.html" style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:23px; letter-spacing:0.01em; color:#E6DED2; text-decoration:none;">Eszter</a>
 
       <div style="display:flex; align-items:center; gap:22px;">
-        <a href="../index.html" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#8A7C6B; font-size:12.5px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">
-          <span style="font-size:15px; line-height:1;">←</span> Back
+        <a href="../index.html" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#8A7C6B; font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">
+          <span style="font-size:15px; line-height:1;">←</span> <span class="nav-back-label">Back</span>
         </a>
 
         <div class="nav-menu" id="navMenu">
@@ -57,7 +87,7 @@
             <hr>
             <div class="nav-group-label">Horror</div>
             <a href="horror1.html">Early Access</a>
-            <a href="horror2.html">Shell Market</a>
+            <span style="display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-radius:12px; color:#6b5f52; font-size:14px;">Shell Market <span style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase;">Current</span></span>
             <hr>
             <div class="nav-group-label">Cozy</div>
             <a href="boxventure.html">Boxventure</a>
@@ -73,50 +103,50 @@
     </div>
   </header>
 
-  <main style="max-width:1180px; margin:0 auto; padding:0 40px 120px;">
+  <main class="page-main" style="max-width:1180px; margin:0 auto; padding:0 40px 120px;">
 
-    <section style="padding:88px 0 56px;">
+    <section class="page-intro" style="padding:88px 0 56px;">
       <div style="display:flex; align-items:center; gap:14px; margin-bottom:26px;">
         <span style="width:26px; height:1px; background:var(--accent);"></span>
         <span style="font-size:12px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent);">Cozy Horror · In Development</span>
       </div>
-      <h1 style="font-family:'Newsreader',serif; font-weight:400; font-size:78px; line-height:1.0; letter-spacing:-0.015em; margin:0 0 22px; color:#E6DED2; max-width:14ch;">Shell Market</h1>
-      <p style="font-size:21px; line-height:1.5; color:#9A8C7A; max-width:52ch; margin:0 0 34px; font-weight:400;">A quiet little shop, and a job that feels almost too peaceful. At least at first.</p>
+      <h1 class="page-title" style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:78px; line-height:1.0; letter-spacing:-0.015em; margin:0 0 22px; color:#E6DED2; max-width:14ch;">Shell Market</h1>
+      <p class="page-lede" style="font-size:21px; line-height:1.5; color:#9A8C7A; max-width:52ch; margin:0 0 34px; font-weight:400;">A quiet little shop, and a job that feels almost too peaceful. At least at first.</p>
       <div style="display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="https://www.tiktok.com/@veloregames" target="_blank" style="text-decoration:none; background:var(--accent); color:#F3E9E0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Follow on TikTok</a>
-        <a href="../blog/index.html" style="text-decoration:none; border:1px solid rgba(217,207,192,0.25); color:#D9CFC0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Read the Blog</a>
-        <a href="https://discord.gg/4heXWGcy29" target="_blank" style="text-decoration:none; border:1px solid rgba(217,207,192,0.25); color:#D9CFC0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:6px;">Join Discord</a>
+        <a href="https://www.tiktok.com/@veloregames" target="_blank" rel="noopener" style="text-decoration:none; background:var(--accent); color:var(--accent-ink); font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:12px;">Follow on TikTok</a>
+        <a href="../blog/index.html" style="text-decoration:none; border:1px solid rgba(217,207,192,0.25); color:#D9CFC0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:12px;">Read the Blog</a>
+        <a href="https://discord.gg/rZAZYGjXmU" target="_blank" rel="noopener" style="text-decoration:none; border:1px solid rgba(217,207,192,0.25); color:#D9CFC0; font-size:13px; font-weight:600; letter-spacing:0.06em; padding:13px 26px; border-radius:12px;">Join Discord</a>
       </div>
     </section>
 
-    <div style="display:grid; grid-template-columns:260px 1fr; gap:80px; align-items:start;">
+    <div class="detail-grid" style="display:grid; grid-template-columns:260px 1fr; gap:80px; align-items:start;">
 
-      <aside style="position:sticky; top:110px;">
+      <aside class="detail-aside" style="position:sticky; top:110px;">
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:22px;">
-          <span style="font-size:11.5px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent);">At a glance</span>
+          <span style="font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent);">At a glance</span>
         </div>
         <dl style="margin:0; border-top:1px solid rgba(217,207,192,0.15);">
           <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
-            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Genre</dt>
-            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Cozy Horror</dd>
+            <dt style="font-size:12px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Genre</dt>
+            <dd style="font-size:16px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Cozy Horror</dd>
           </div>
           <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
-            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Mood</dt>
-            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Unsettling</dd>
+            <dt style="font-size:12px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Mood</dt>
+            <dd style="font-size:16px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Unsettling</dd>
           </div>
           <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
-            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Engine</dt>
-            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Unreal Engine</dd>
+            <dt style="font-size:12px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Engine</dt>
+            <dd style="font-size:16px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">Unreal Engine</dd>
           </div>
           <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0; border-bottom:1px solid rgba(217,207,192,0.12);">
-            <dt style="font-size:11.5px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Status</dt>
-            <dd style="font-size:15.5px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">In Development</dd>
+            <dt style="font-size:12px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#8A7C6B; margin:0;">Status</dt>
+            <dd style="font-size:16px; font-weight:500; color:#E6DED2; margin:0; text-align:right;">In Development</dd>
           </div>
         </dl>
       </aside>
 
-      <div style="max-width:640px;">
-        <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">What's coming</h2>
+      <div class="detail-body" style="max-width:640px;">
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:34px; line-height:1.1; letter-spacing:-0.01em; margin:0 0 28px; color:#E6DED2;">What's coming</h2>
 
         <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">Shell Market is my debut game, made in Unreal Engine. You work in a little shop, and at first it feels lovely. Calm, quiet, the kind of place you'd happily spend your evenings. But that peace is deceiving, and the longer you stay, the more you start to notice that something isn't quite right.</p>
 
@@ -125,9 +155,9 @@
         <p style="font-size:18px; line-height:1.72; color:#C4B8A6; margin:0 0 26px;">If you want to know more, come read the blog, follow along on TikTok, or just say hi on Discord. <span style="color:var(--accent);">❤</span></p>
 
         <div style="margin-top:64px;">
-          <p style="font-size:11.5px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin:0 0 22px;">Early insights</p>
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin:0 0 22px;">Early insights</p>
           <div style="border:1px solid rgba(217,207,192,0.14); border-radius:12px; padding:32px 30px; background:rgba(217,207,192,0.03);">
-            <p style="font-size:16.5px; line-height:1.7; color:#9A8C7A; margin:0;">There's nothing to show just yet. Screenshots and clips will land here as soon as the game starts taking shape, so check back soon. If you want to see it first, TikTok is the place to be.</p>
+            <p style="font-size:17px; line-height:1.7; color:#9A8C7A; margin:0;">There's nothing to show just yet. Screenshots and clips will land here as soon as the game starts taking shape, so check back soon. If you want to see it first, TikTok is the place to be.</p>
           </div>
         </div>
 
@@ -137,9 +167,9 @@
   </main>
 
   <footer style="border-top:1px solid rgba(217,207,192,0.08);">
-    <div style="max-width:1180px; margin:0 auto; padding:34px 40px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
-      <span style="font-family:'Newsreader',serif; font-size:18px; color:#C4B8A6;">Eszter</span>
-      <span style="font-size:12.5px; color:#8A7C6B; letter-spacing:0.04em;">Shell Market · In Development</span>
+    <div class="footer-inner" style="max-width:1180px; margin:0 auto; padding:34px 40px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+      <span style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:18px; color:#C4B8A6;">Eszter</span>
+      <span style="font-size:13px; color:#8A7C6B; letter-spacing:0.04em;">Shell Market · In Development</span>
     </div>
   </footer>
 

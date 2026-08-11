@@ -34,14 +34,14 @@
 
     /* Filter tabs */
     .blog-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .filter-btn { background: none; border: 1px solid #4a3924; color: #cbb896; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.95rem; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn { background: none; border: 1px solid #4a3924; color: #cbb896; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.95rem; border-radius:999px; cursor: pointer; transition: all 0.2s; }
     .filter-btn:hover { border-color: #f5b45c; color: #f8ecd6; }
     .filter-btn.active { background: #f5b45c; border-color: #f5b45c; color: #140d08; }
 
     /* Entry */
     .blog-entry {
       display: block; text-decoration: none;
-      border: 1px solid #4a3924; border-radius: 14px;
+      border: 1px solid #4a3924; border-radius:12px;
       background: linear-gradient(180deg, #1d160e, #130d07);
       padding: 26px 28px; margin-bottom: 18px;
       box-shadow: 0 18px 44px -30px rgba(0,0,0,.8);
@@ -50,7 +50,7 @@
     .blog-entry:hover { transform: translateY(-3px); border-color: #6f5230; }
     .entry-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
     .entry-date { font-size: 0.75rem; color: #f0b25a; letter-spacing: 0.08em; }
-    .entry-cat { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid #6f5230; border-radius: 20px; color: #ecd4ac; }
+    .entry-cat { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid #6f5230; border-radius:999px; color: #ecd4ac; }
     .entry-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.7rem; color: #f8ecd6; margin-bottom: 0.5rem; line-height: 1.15; }
     .entry-excerpt { font-size: 0.9rem; color: #cbb896; line-height: 1.65; }
     .entry-read { font-size: 0.72rem; color: #f5b45c; margin-top: 0.9rem; display: block; letter-spacing: 0.08em; font-weight: 700; text-transform: uppercase; }
@@ -58,7 +58,18 @@
     footer { padding: 2rem 8vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2a2013; }
     .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #cbb896; }
     .footer-copy { font-size: 0.78rem; color: #8a7a5c; }
-    @media (max-width: 600px) { nav { padding: 14px 6vw; } }
+    /* --- Kleinere Bildschirme: Handy und Tablet --- */
+    @media (max-width: 700px) {
+      nav { padding: 14px 6vw; }
+      .blog-header { padding: 64px 6vw 32px; }
+      .blog-header .glow { width: 300px; height: 300px; top: -80px; }
+      .blog-list { padding: 1.5rem 6vw 5rem; }
+      .blog-entry { padding: 22px 20px; }
+      .entry-header { padding: 60px 6vw 28px; }
+      .entry-body { padding: 0 6vw 4.5rem; }
+      .entry-divider { margin: 1.8rem 6vw; }
+      footer { flex-direction: column; align-items: flex-start; gap: 10px; padding: 1.8rem 6vw; }
+    }
   </style>
 </head>
 <body>
@@ -71,7 +82,7 @@
     <div class="glow"></div>
     <p class="blog-eyebrow">Devlogs &amp; Thoughts</p>
     <h1>My <em>Blog</em></h1>
-    <p>Behind the scenes of my games. Honest, personal, unfiltered.</p>
+    <p>The parts of gamedev nobody posts about.</p>
   </div>
 
   <div class="blog-list">
@@ -84,17 +95,9 @@
       <button class="filter-btn" onclick="filterBlog('thoughts', this)">Thoughts</button>
     </div>
 
-    <!--
-      ADD A NEW ENTRY:
-      1. Copy one .blog-entry block
-      2. Adjust href, date, category (data-cat), title and excerpt
-      3. Insert the newest entries at the TOP
-      4. Create the matching HTML file in the blog/ folder (template = vorlage.html)
-    -->
-
     <a class="blog-entry" href="eintrag-1.html" data-cat="devlog">
       <div class="entry-meta">
-        <span class="entry-date">July 18, 2026</span>
+        <span class="entry-date">August 10, 2026</span>
         <span class="entry-cat">Devlog</span>
       </div>
       <div class="entry-title">I'm building a horror game. And honestly? It terrifies me.</div>
